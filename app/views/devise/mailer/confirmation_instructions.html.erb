@@ -1,0 +1,3 @@
+<p>Welcome <%= @email %>!</p>
+<p>Click the link below to sign in:</p>
+<p><%= link_to 'Sign in', confirmation_url(@resource, confirmation_token: @token) %></p>

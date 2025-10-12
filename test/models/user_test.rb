@@ -86,13 +86,29 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "should validate unique email" do
-    # TODO: Fix Devise test setup for uniqueness validation
-    skip "Devise test configuration needed"
+    @user.save!
+    duplicate_user = User.new(
+      email: @user.email,
+      username: "different",
+      full_name: "Different User",
+      password: "password123",
+      password_confirmation: "password123"
+    )
+    assert_not duplicate_user.valid?
+    assert_includes duplicate_user.errors[:email], "has already been taken"
   end
 
   test "should validate unique username" do
-    # TODO: Fix Devise test setup for uniqueness validation
-    skip "Devise test configuration needed"
+    @user.save!
+    duplicate_user = User.new(
+      email: "different@example.com",
+      username: @user.username,
+      full_name: "Different User",
+      password: "password123",
+      password_confirmation: "password123"
+    )
+    assert_not duplicate_user.valid?
+    assert_includes duplicate_user.errors[:username], "has already been taken"
   end
 
   test "should have associations" do

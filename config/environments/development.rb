@@ -31,12 +31,13 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  # Preview email in browser using letter_opener
+  # Show emails in console for easy magic link access in development
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
 
-  # Also log email content for debugging
-  config.action_mailer.logger = Logger.new(STDOUT)
+  # Log all emails to console to see magic links
+  config.action_mailer.logger = Rails.logger
 
   # Make template changes take effect immediately.
   config.action_mailer.perform_caching = false

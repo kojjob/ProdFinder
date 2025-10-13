@@ -11,7 +11,34 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    super
+    build_resource(sign_up_params)
+
+    if resource.save
+      # For passwordless authentication with confirmable, we need to send confirmation email
+      # Skip the automatic confirmation email and send it manually to avoid mapping issues
+      resource.skip_confirmation_notification!
+
+      if resource.active_for_authentication?
+        set_flash_message!(:notice, :signed_up)
+        sign_up(resource_name, resource)
+        respond_with resource, location: after_sign_up_path_for(resource)
+      else
+        # Send confirmation email manually
+        begin
+          Devise::Mailer.confirmation_instructions(resource, resource.confirmation_token).deliver_now
+          set_flash_message!(:notice, :"signed_up_but_#{resource.inactive_message}")
+        rescue => e
+          Rails.logger.error "Failed to send confirmation email: #{e.message}"
+          set_flash_message!(:notice, :signed_up)
+        end
+        expire_data_after_sign_in!
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      respond_with resource
+    end
   end
 
   # GET /resource/edit
@@ -46,7 +73,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [ :email, :username, :full_name ])
+    params.require(:user).permit(:email, :username, :full_name)
   end
 
   # If you have extra params to permit, append them to the sanitizer.

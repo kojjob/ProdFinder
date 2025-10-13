@@ -10,6 +10,7 @@ class ProductTest < ActiveSupport::TestCase
       tagline: "A great product for testing",
       description: "This is a detailed description of the test product. It should be at least 50 characters long to pass validation.",
       website_url: "https://example.com",
+      slug: "test-product",
       user: @user
     )
   end
@@ -138,5 +139,74 @@ class ProductTest < ActiveSupport::TestCase
     assert_respond_to Product, :freemium
     assert_respond_to Product, :paid
     assert_respond_to Product, :subscription
+  end
+
+  test "should generate slug automatically" do
+    product = Product.new(
+      name: "Awesome Product",
+      tagline: "A great tagline for testing purposes",
+      description: "This is a valid description that meets the minimum length requirement for testing",
+      website_url: "https://example.com",
+      user: @user
+    )
+    product.valid?
+    assert_equal "awesome-product", product.slug
+  end
+
+  test "should generate unique slug for duplicate names" do
+    existing_product = Product.create!(
+      name: "Awesome Product",
+      tagline: "A great tagline for testing purposes",
+      description: "This is a valid description that meets the minimum length requirement for testing",
+      website_url: "https://example.com",
+      slug: "awesome-product",
+      user: @user
+    )
+
+    new_product = Product.new(
+      name: "Awesome Product",
+      tagline: "Another great tagline for testing",
+      description: "This is another valid description that meets the minimum length requirement for testing",
+      website_url: "https://another.com",
+      user: @user
+    )
+    new_product.valid?
+    assert_equal "awesome-product-1", new_product.slug
+  end
+
+  test "should know if live" do
+    @product.status = :live
+    assert @product.live?
+    assert_not @product.draft?
+  end
+
+  test "should know if draft" do
+    @product.status = :draft
+    assert @product.draft?
+    assert_not @product.live?
+  end
+
+  test "should know if featured" do
+    assert_not @product.featured?
+    @product.featured_at = Time.current
+    assert @product.featured?
+  end
+
+  test "should know if product of day" do
+    assert_not @product.product_of_day?
+    @product.product_of_day_at = Date.current
+    assert @product.product_of_day?
+  end
+
+  test "should mark as featured" do
+    assert_not @product.featured?
+    @product.mark_as_featured!
+    assert @product.featured?
+  end
+
+  test "should mark as product of day" do
+    assert_not @product.product_of_day?
+    @product.mark_as_product_of_day!
+    assert @product.product_of_day?
   end
 end

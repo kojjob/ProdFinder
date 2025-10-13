@@ -18,10 +18,15 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="bg-secondary-50">
+    <!-- Flash Messages for non-auth pages -->
+    <% unless controller_name == 'sessions' || controller_name == 'registrations' || controller_name == 'confirmations' %>
+      <div class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
+        <%= render "shared/flash_messages" %>
+      </div>
+    <% end %>
+
+    <main class="<%= controller_name == 'sessions' || controller_name == 'registrations' || controller_name == 'confirmations' ? '' : 'container mx-auto mt-28 px-5 flex' %>">
       <%= yield %>
     </main>
   </body>

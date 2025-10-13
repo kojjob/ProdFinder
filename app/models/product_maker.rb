@@ -20,7 +20,7 @@ class ProductMaker < ApplicationRecord
   # TODO: Add validation for hunter can't also be maker on same product
 
   # Enums
-  enum role: { founder: 0, co_founder: 1, team_member: 2 }
+  enum :role, { founder: 0, co_founder: 1, team_member: 2 }
 
   # Business Rules
   # - Founders get notifications for all product activity (handled by notification system)

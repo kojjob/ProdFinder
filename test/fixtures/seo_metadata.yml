@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  seoable: one
+  seoable_type: Seoable
+  title: MyString
+  description: MyString
+  keywords: MyString
+  og_title: MyString
+  og_description: MyString
+  og_image_url: MyString
+  twitter_title: MyString
+  twitter_description: MyString
+  twitter_image_url: MyString
+  canonical_url: MyString
+  robots: MyString
+  json_ld: 
+
+two:
+  seoable: two
+  seoable_type: Seoable
+  title: MyString
+  description: MyString
+  keywords: MyString
+  og_title: MyString
+  og_description: MyString
+  og_image_url: MyString
+  twitter_title: MyString
+  twitter_description: MyString
+  twitter_image_url: MyString
+  canonical_url: MyString
+  robots: MyString
+  json_ld: 

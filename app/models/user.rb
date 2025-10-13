@@ -3,20 +3,39 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :validatable, :trackable
+  devise :magic_link_authenticatable, :registerable, :confirmable,
+         :rememberable, :validatable, :trackable
 
-  # Relationships
+  # Relationships - Products
   has_many :product_makers, dependent: :destroy
-  has_many :products, through: :product_makers
+  has_many :products, through: :product_makers, source: :product
   has_many :upvotes, dependent: :destroy
   has_many :upvoted_products, through: :upvotes, source: :product
   has_many :comments, dependent: :destroy
-  has_many :collections, dependent: :destroy
-  has_many :notifications, dependent: :destroy
-  has_many :followers, class_name: "Follow", foreign_key: "followee_id", dependent: :destroy
-  has_many :following, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
+  has_many :comment_upvotes, dependent: :destroy
+
+  # Relationships - Social
+  has_many :follower_relationships, class_name: "Follow", foreign_key: "followee_id", dependent: :destroy
+  has_many :followers, through: :follower_relationships, source: :follower
+  has_many :following_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
+  has_many :following, through: :following_relationships, source: :followee
+
+  # Relationships - Topics & Collections
   has_many :topic_follows, dependent: :destroy
+  has_many :followed_topics, through: :topic_follows, source: :topic
+  has_many :collections, dependent: :destroy
+
+  # Relationships - Notifications
+  has_many :notifications, dependent: :destroy
+  has_many :triggered_notifications, class_name: "Notification", foreign_key: "actor_id", dependent: :nullify
+
+  # Relationships - Blog
+  has_many :posts, as: :author, dependent: :destroy
+  has_many :blog_comments, dependent: :destroy
+  has_many :approved_blog_comments, -> { approved }, class_name: "BlogComment"
+
+  # Relationships - SEO
+  has_many :seo_metadata, as: :seoable, dependent: :destroy
 
   # Validations
   validates :username, presence: true, uniqueness: true,

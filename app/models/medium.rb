@@ -16,7 +16,7 @@ class Medium < ApplicationRecord
   belongs_to :product
 
   # Enums
-  enum media_type: { image: 0, video: 1, gif: 2 }
+  enum :media_type, { image: 0, video: 1, gif: 2 }
 
   # Validations
   validates :file_url, presence: true

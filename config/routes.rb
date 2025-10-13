@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    sessions: "users/sessions",
+    sessions: "devise/passwordless/sessions",
     registrations: "users/registrations",
-    confirmations: "users/confirmations",
-    passwords: "users/passwords"
+    confirmations: "users/confirmations"
   }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -16,5 +15,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "users/sessions#new"
+  root "pages#home"
 end

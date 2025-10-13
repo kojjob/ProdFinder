@@ -7,9 +7,7 @@ class UserTest < ActiveSupport::TestCase
     @user = User.new(
       email: "test@example.com",
       username: "testuser",
-      full_name: "Test User",
-      password: "password123",
-      password_confirmation: "password123"
+      full_name: "Test User"
     )
   end
 
@@ -73,8 +71,7 @@ class UserTest < ActiveSupport::TestCase
     user = User.new(
       email: "test2@example.com",
       username: "testuser2",
-      full_name: "Test User 2",
-      password: "password123"
+      full_name: "Test User 2"
     )
 
     assert_equal 0, user.reputation_score
@@ -90,9 +87,7 @@ class UserTest < ActiveSupport::TestCase
     duplicate_user = User.new(
       email: @user.email,
       username: "different",
-      full_name: "Different User",
-      password: "password123",
-      password_confirmation: "password123"
+      full_name: "Different User"
     )
     assert_not duplicate_user.valid?
     assert_includes duplicate_user.errors[:email], "has already been taken"
@@ -103,9 +98,7 @@ class UserTest < ActiveSupport::TestCase
     duplicate_user = User.new(
       email: "different@example.com",
       username: @user.username,
-      full_name: "Different User",
-      password: "password123",
-      password_confirmation: "password123"
+      full_name: "Different User"
     )
     assert_not duplicate_user.valid?
     assert_includes duplicate_user.errors[:username], "has already been taken"

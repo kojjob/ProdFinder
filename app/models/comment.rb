@@ -6,7 +6,7 @@ class Comment < ApplicationRecord
   # - product_id (uuid, foreign key, indexed)
   # - user_id (uuid, foreign key, indexed)
   # - parent_id (uuid, foreign key, nullable, self-referential)
-  # - body (text, required)
+  # - body (text, required, max: 1000 chars)
   # - upvotes_count (integer, default: 0, counter_cache)
   # - edited_at (datetime, nullable)
   # - deleted_at (datetime, nullable) # Soft delete
@@ -21,13 +21,13 @@ class Comment < ApplicationRecord
   has_many :upvoters, through: :comment_upvotes, source: :user
 
   # Scopes
-  default_scope -> { where(deleted_at: nil) }
+  scope :active, -> { where(deleted_at: nil) }
   scope :recent, -> { order(created_at: :desc) }
   scope :top_comments, -> { order(upvotes_count: :desc, created_at: :desc) }
   scope :root_comments, -> { where(parent_id: nil) }
 
   # Validations
-  validates :body, presence: true, length: { minimum: 1, maximum: 5000 }
+  validates :body, presence: true, length: { maximum: 1000 }
 
   validate :max_nesting_depth
   validate :cannot_comment_on_archived_product

@@ -11,8 +11,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    params[:user][:password] = SecureRandom.hex(16)
-    params[:user][:password_confirmation] = params[:user][:password]
     super
   end
 
@@ -45,6 +43,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :email, :username, :full_name ])
+  end
+
+  def sign_up_params
+    permitted_params = devise_parameter_sanitizer.permit(:sign_up, keys: [ :email, :username, :full_name ])
+
+    # Generate secure password for passwordless authentication
+    generated_password = SecureRandom.hex(16)
+    permitted_params[:password] = generated_password
+    permitted_params[:password_confirmation] = generated_password
+
+    permitted_params
   end
 
   # If you have extra params to permit, append them to the sanitizer.

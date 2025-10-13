@@ -1,10 +1,10 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  slug: MyString
+  title: Getting Started with AI Tools
+  slug: getting-started-with-ai-tools
   content: MyText
-  excerpt: MyString
+  excerpt: Learn about the latest AI tools
   author: one
   author_type: Author
   status: 1
@@ -15,16 +15,16 @@ one:
   comments_count: 1
   reading_time: 1
   tags: MyText
-  meta_title: MyString
-  meta_description: MyString
-  og_image_url: MyString
-  canonical_url: MyString
+  meta_title: Getting Started with AI Tools
+  meta_description: Learn about the latest AI tools and how to use them
+  og_image_url: https://example.com/ai-tools-og.jpg
+  canonical_url: https://example.com/blog/getting-started-with-ai-tools
 
 two:
-  title: MyString
-  slug: MyString
+  title: Design Trends for 2025
+  slug: design-trends-2025
   content: MyText
-  excerpt: MyString
+  excerpt: Latest design trends for the coming year
   author: two
   author_type: Author
   status: 1
@@ -35,7 +35,7 @@ two:
   comments_count: 1
   reading_time: 1
   tags: MyText
-  meta_title: MyString
-  meta_description: MyString
-  og_image_url: MyString
-  canonical_url: MyString
+  meta_title: Design Trends for 2025
+  meta_description: Discover the latest design trends for 2025
+  og_image_url: https://example.com/design-trends-og.jpg
+  canonical_url: https://example.com/blog/design-trends-2025

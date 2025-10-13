@@ -1,18 +1,18 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  slug: MyString
-  description: MyText
+  name: Technology
+  slug: technology
+  description: Technology related posts
   parent: one
   posts_count: 1
   position: 1
   featured: false
 
 two:
-  name: MyString
-  slug: MyString
-  description: MyText
+  name: Design
+  slug: design
+  description: Design related posts
   parent: two
   posts_count: 1
   position: 1

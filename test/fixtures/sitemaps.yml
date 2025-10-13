@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  url: MyString
-  priority: 9.99
-  changefreq: MyString
+  url: https://example.com/products
+  priority: 0.9
+  changefreq: daily
   lastmod: 2025-10-13 00:52:10
   sitemap_type: 1
 
 two:
-  url: MyString
-  priority: 9.99
-  changefreq: MyString
+  url: https://example.com/blog
+  priority: 0.8
+  changefreq: weekly
   lastmod: 2025-10-13 00:52:10
   sitemap_type: 1

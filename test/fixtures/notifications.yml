@@ -6,9 +6,9 @@ one:
   notifiable: one
   notifiable_type: Notifiable
   notification_type: 1
-  title: MyString
+  title: New Product Upvote
   body: MyText
-  action_url: MyString
+  action_url: https://example.com/products/1
   read_at: 2025-10-13 00:44:25
   email_sent_at: 2025-10-13 00:44:25
 
@@ -18,8 +18,8 @@ two:
   notifiable: two
   notifiable_type: Notifiable
   notification_type: 1
-  title: MyString
+  title: New Comment
   body: MyText
-  action_url: MyString
+  action_url: https://example.com/products/2
   read_at: 2025-10-13 00:44:25
   email_sent_at: 2025-10-13 00:44:25

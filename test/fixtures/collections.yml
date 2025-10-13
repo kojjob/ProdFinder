@@ -2,10 +2,10 @@
 
 one:
   user: one
-  name: MyString
-  slug: MyString
-  description: MyText
-  cover_image_url: MyString
+  name: AI Tools Collection
+  slug: ai-tools-collection
+  description: Collection of AI tools and products
+  cover_image_url: https://example.com/ai-tools.jpg
   featured: false
   products_count: 1
   followers_count: 1
@@ -14,10 +14,10 @@ one:
 
 two:
   user: two
-  name: MyString
-  slug: MyString
-  description: MyText
-  cover_image_url: MyString
+  name: Design Resources
+  slug: design-resources
+  description: Collection of design tools and resources
+  cover_image_url: https://example.com/design-resources.jpg
   featured: false
   products_count: 1
   followers_count: 1

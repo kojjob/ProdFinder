@@ -50,6 +50,16 @@ class User < ApplicationRecord
 
   # Passwordless authentication - no password needed
 
+  def send_passwordless_link
+    # Generate secure token
+    self.passwordless_token = SecureRandom.urlsafe_base64(32)
+    self.passwordless_token_sent_at = Time.current
+    save!
+
+    # Send magic link email
+    Devise.mailer.magic_link_instructions(self, passwordless_token).deliver_now
+  end
+
   # Scopes
   scope :makers, -> { where(maker_status: true) }
   scope :verified, -> { where(verified: true) }

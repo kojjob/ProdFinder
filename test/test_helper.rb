@@ -12,5 +12,10 @@ module ActiveSupport
 
     # Add more helper methods to be used by all tests here...
     include Devise::Test::IntegrationHelpers
+
+    # Setup for devise-passwordless testing
+    setup do
+      @request = ActionDispatch::TestRequest.create if defined?(@request)
+    end
   end
 end

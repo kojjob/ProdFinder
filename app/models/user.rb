@@ -48,17 +48,7 @@ class User < ApplicationRecord
   # TODO: Add country code validation with ISO3166 gem
   # validates :country_code, inclusion: { in: ISO3166::Country.codes }, allow_blank: true
 
-  # Passwordless authentication - no password needed
-
-  def send_passwordless_link
-    # Generate secure token
-    self.passwordless_token = SecureRandom.urlsafe_base64(32)
-    self.passwordless_token_sent_at = Time.current
-    save!
-
-    # Send magic link email
-    Devise.mailer.magic_link_instructions(self, passwordless_token).deliver_now
-  end
+  # Passwordless authentication using devise-passwordless gem
 
   # Scopes
   scope :makers, -> { where(maker_status: true) }

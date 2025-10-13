@@ -6,8 +6,8 @@ one:
   content: MyText
   excerpt: Learn about the latest AI tools
   author: one
-  author_type: Author
-  status: 1
+  author_type: User
+  status: 2
   published_at: 2025-10-13 00:51:52
   featured: false
   featured_at: 2025-10-13 00:51:52
@@ -26,8 +26,8 @@ two:
   content: MyText
   excerpt: Latest design trends for the coming year
   author: two
-  author_type: Author
-  status: 1
+  author_type: User
+  status: 2
   published_at: 2025-10-13 00:51:52
   featured: false
   featured_at: 2025-10-13 00:51:52

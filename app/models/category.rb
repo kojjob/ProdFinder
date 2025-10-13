@@ -74,33 +74,60 @@ class Category < ApplicationRecord
   end
 
   def move_up
-    return if root? && position <= 1
+    # Guard against nil positions
+    return if position.nil?
 
-    if root?
-      siblings = Category.root_categories.where("position < ?", position).order(position: :desc).first
+    # Get minimum sibling position to check if we're at the top
+    min_sibling_position = if root?
+      Category.root_categories.where.not(position: nil).minimum(:position)
     else
-      siblings = parent.children.where("position < ?", position).order(position: :desc).first
+      return unless parent.present?
+      parent.children.where.not(position: nil).minimum(:position)
     end
 
-    return unless siblings
+    # Return early if we're already at the top position
+    return if min_sibling_position.nil? || position <= min_sibling_position
 
+    # Find the sibling above us
+    siblings = if root?
+      Category.root_categories.where.not(position: nil).where("position < ?", position).order(position: :desc).first
+    else
+      parent.children.where.not(position: nil).where("position < ?", position).order(position: :desc).first
+    end
+
+    return unless siblings && siblings.position.present?
+
+    # Perform the swap only when both positions are non-nil
     old_position = position
     update!(position: siblings.position)
     siblings.update!(position: old_position)
   end
 
   def move_down
-    max_position = root? ? Category.root_categories.maximum(:position) : parent.children.maximum(:position)
-    return if position >= max_position
+    # Guard against nil positions
+    return if position.nil?
 
-    if root?
-      siblings = Category.root_categories.where("position > ?", position).order(position: :asc).first
+    # Get maximum sibling position
+    max_sibling_position = if root?
+      Category.root_categories.where.not(position: nil).maximum(:position)
     else
-      siblings = parent.children.where("position > ?", position).order(position: :asc).first
+      return unless parent.present?
+      parent.children.where.not(position: nil).maximum(:position)
     end
 
-    return unless siblings
+    # Return early if we're already at the bottom or no positions exist
+    return if max_sibling_position.nil? || position >= max_sibling_position
 
+    # Find the sibling below us
+    siblings = if root?
+      Category.root_categories.where.not(position: nil).where("position > ?", position).order(position: :asc).first
+    else
+      parent.children.where.not(position: nil).where("position > ?", position).order(position: :asc).first
+    end
+
+    return unless siblings && siblings.position.present?
+
+    # Perform the swap only when both positions are non-nil
     old_position = position
     update!(position: siblings.position)
     siblings.update!(position: old_position)

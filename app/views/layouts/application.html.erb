@@ -19,6 +19,11 @@
     <%= javascript_importmap_tags %>
   </head>
   <body class="bg-gray-50">
+    <!-- Toast Container -->
+    <div id="toast-container" data-controller="toast" class="fixed top-4 right-4 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- Modal Container -->
+    <div id="modal-container"></div>
     <!-- Navigation -->
     <% unless controller_name == 'sessions' || controller_name == 'registrations' || controller_name == 'confirmations' %>
       <%= render "shared/navbar" %>

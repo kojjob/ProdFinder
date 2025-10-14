@@ -37,7 +37,11 @@ class User < ApplicationRecord
   # Relationships - SEO
   has_many :seo_metadata, as: :seoable, dependent: :destroy
 
+  # Active Storage
+  has_one_attached :avatar
+
   # Validations
+  validate :avatar_validation
   validates :username, presence: true, uniqueness: true,
             format: { with: /\A[a-zA-Z0-9_]+\z/, message: "only allows letters, numbers, and underscores" },
             length: { minimum: 3, maximum: 30 }
@@ -61,4 +65,51 @@ class User < ApplicationRecord
   # - Verified status manually granted by admins
   # - Can't change username more than once per 30 days
   # - Maker status automatically set when first product launched
+
+  # Avatar helper method
+  def avatar_url(size: :medium)
+    return nil unless avatar.attached?
+
+    case size
+    when :thumb
+      avatar.variant(resize_to_limit: [ 100, 100 ])
+    when :medium
+      avatar.variant(resize_to_limit: [ 400, 400 ])
+    when :large
+      avatar.variant(resize_to_limit: [ 800, 800 ])
+    else
+      avatar
+    end
+  end
+
+  def avatar_initials
+    full_name.split.map(&:first).join.upcase[0..1]
+  end
+
+  # Check if user has upvoted a product
+  def upvoted?(product)
+    upvotes.exists?(product_id: product.id)
+  end
+
+  # Check if user has upvoted a comment
+  def upvoted_comment?(comment)
+    comment_upvotes.exists?(comment_id: comment.id)
+  end
+
+  private
+
+  def avatar_validation
+    return unless avatar.attached?
+
+    # Check file size (max 5MB)
+    if avatar.blob.byte_size > 5.megabytes
+      errors.add(:avatar, "must be less than 5MB")
+    end
+
+    # Check content type
+    acceptable_types = [ "image/jpeg", "image/jpg", "image/png", "image/gif", "image/webp" ]
+    unless acceptable_types.include?(avatar.blob.content_type)
+      errors.add(:avatar, "must be a JPEG, PNG, GIF, or WebP image")
+    end
+  end
 end

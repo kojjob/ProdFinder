@@ -46,6 +46,10 @@ class Product < ApplicationRecord
   validates :description, presence: true, length: { minimum: 50, maximum: 5000 }
   validates :website_url, presence: true, format: { with: URI.regexp(%w[http https]), message: "must be a valid URL" }
   validates :slug, presence: true, uniqueness: true, format: { with: /\A[a-z0-9-]+\z/, message: "only allows lowercase letters, numbers, and hyphens" }
+
+  # Custom validations
+  validate :must_have_at_least_one_maker, on: :update
+  validate :must_have_valid_makers
   # TODO: Add validation for launch_date cannot be in past (for new products)
   # TODO: Add validation for status transitions
 
@@ -142,6 +146,18 @@ class Product < ApplicationRecord
 
   def set_default_pricing_type
     self.pricing_type ||= :free
+  end
+
+  def must_have_at_least_one_maker
+    errors.add(:base, "Product must have at least one maker") if makers.empty?
+  end
+
+  def must_have_valid_makers
+    product_makers.each do |product_maker|
+      if product_maker.user_id.blank?
+        errors.add(:base, "All makers must have a valid user")
+      end
+    end
   end
 
   # Business Rules

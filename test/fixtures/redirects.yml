@@ -1,15 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  from_path: MyString
-  to_path: MyString
-  status_code: 1
+  from_path: /old-path
+  to_path: /new-path
+  status_code: 301
   active: false
   expires_at: 2025-10-13 00:52:07
 
 two:
-  from_path: MyString
-  to_path: MyString
-  status_code: 1
+  from_path: /another-old-path
+  to_path: /another-new-path
+  status_code: 302
   active: false
   expires_at: 2025-10-13 00:52:07

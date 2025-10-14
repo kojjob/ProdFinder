@@ -16,6 +16,9 @@ export default class extends Controller {
     
     // Debounce username validation to avoid too many API calls
     this.usernameValidationTimeout = null
+    
+    // Track username availability state
+    this.usernameAvailable = null
   }
 
   validateEmail() {
@@ -58,6 +61,9 @@ export default class extends Controller {
       return
     }
     
+    // Set username availability to false before API call
+    this.usernameAvailable = false
+    
     // Debounced availability check
     this.usernameValidationTimeout = setTimeout(() => {
       this.checkUsernameAvailability(username)
@@ -89,12 +95,15 @@ export default class extends Controller {
       const unavailableUsernames = ['admin', 'root', 'user', 'test', 'demo']
       
       if (unavailableUsernames.includes(username.toLowerCase())) {
+        this.usernameAvailable = false
         this.showUsernameError("This username is not available")
       } else {
+        this.usernameAvailable = true
         this.showUsernameSuccess()
       }
     } catch (error) {
       console.error('Username validation error:', error)
+      this.usernameAvailable = false
       // Don't show error to user for API failures
     }
     
@@ -149,6 +158,8 @@ export default class extends Controller {
     this.usernameErrorTarget.classList.add("hidden")
     this.usernameSuccessTarget.classList.add("hidden")
     this.usernameValidIconTarget.classList.add("hidden")
+    // Reset username availability when clearing validation
+    this.usernameAvailable = null
   }
 
   // Name validation methods
@@ -182,7 +193,10 @@ export default class extends Controller {
     const isUsernameValid = this.usernameRegex.test(username)
     const isNameValid = this.nameRegex.test(fullName)
 
-    if (isEmailValid && isUsernameValid && isNameValid) {
+    // Require username availability in addition to regex validity
+    const allValid = isEmailValid && isUsernameValid && isNameValid && this.usernameAvailable === true
+
+    if (allValid) {
       this.submitButtonTarget.disabled = false
       this.submitButtonTarget.classList.remove("opacity-50", "cursor-not-allowed")
     } else {
@@ -229,5 +243,13 @@ export default class extends Controller {
     this.submitButtonTarget.disabled = false
     this.submitButtonTarget.classList.remove("btn-loading")
     this.loadingMessageTarget.classList.add("hidden")
+  }
+
+  disconnect() {
+    // Clean up timeout to avoid memory leaks
+    if (this.usernameValidationTimeout) {
+      clearTimeout(this.usernameValidationTimeout)
+      this.usernameValidationTimeout = null
+    }
   }
 }

@@ -21,6 +21,7 @@ class BlogComment < ApplicationRecord
   before_create :set_default_status
   after_create :increment_post_comments_count
   after_destroy :decrement_post_comments_count
+  after_update :update_post_comments_count_on_status_change
 
   def self.ransackable_attributes(auth_object = nil)
     %w[content status user_id post_id]
@@ -105,6 +106,26 @@ class BlogComment < ApplicationRecord
 
   def decrement_post_comments_count
     post.decrement!(:comments_count) if approved?
+  end
+
+  def update_post_comments_count_on_status_change
+    return unless saved_change_to_status?
+    return unless post.present?
+
+    old_status = saved_change_to_status[0]
+    new_status = saved_change_to_status[1]
+
+    # Handle status transitions that affect comments_count
+    if old_status != "approved" && new_status == "approved"
+      # Transition to approved - increment count
+      Post.increment_counter(:comments_count, post.id)
+    elsif old_status == "approved" && new_status != "approved"
+      # Transition away from approved - decrement count
+      Post.decrement_counter(:comments_count, post.id)
+    end
+  rescue => e
+    # Log error but don't fail the update
+    Rails.logger.error "Failed to update comments_count for post #{post.id}: #{e.message}"
   end
 
   def post_must_be_published

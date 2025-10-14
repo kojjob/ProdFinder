@@ -16,7 +16,7 @@ class Collection < ApplicationRecord
   # - timestamps
 
   # Enums
-  enum :visibility, { visible: 0, unlisted: 1, hidden: 2 }
+  enum :visibility, { public: 0, unlisted: 1, private: 2 }
 
   # Relationships
   belongs_to :user
@@ -49,17 +49,7 @@ class Collection < ApplicationRecord
     slug
   end
 
-  def public?
-    visibility == "public"
-  end
-
-  def private?
-    visibility == "private"
-  end
-
-  def unlisted?
-    visibility == "unlisted"
-  end
+  # enum provides public?/private?/unlisted? predicates
 
   def visible_to?(user)
     return true if public?

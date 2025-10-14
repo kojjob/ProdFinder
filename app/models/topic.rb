@@ -12,6 +12,7 @@ class Topic < ApplicationRecord
   # - followers_count (integer, default: 0, counter_cache)
   # - position (integer, default: 0, for ordering)
   # - featured (boolean, default: false)
+  # - status (integer, default: 0) # enum: 0=active, 1=inactive
   # - timestamps
 
   # Relationships
@@ -20,13 +21,18 @@ class Topic < ApplicationRecord
   has_many :topic_follows, dependent: :destroy
   has_many :followers, through: :topic_follows, source: :user
 
+  # Enums
+  enum :status, [ :active, :inactive ]
+
   # Validations
-  validates :name, presence: true, uniqueness: true, length: { in: 2..50 }
+  validates :name, presence: true, uniqueness: true, length: { in: 3..50 }
   validates :slug, presence: true, uniqueness: true
-  validates :description, length: { maximum: 500 }, allow_blank: true
+  validates :description, presence: true, length: { minimum: 20, maximum: 500 }
   validates :color, format: { with: /\A#[0-9A-Fa-f]{6}\z/, message: "must be a valid hex color" }, allow_blank: true
 
   # Callbacks
+  after_initialize :set_default_status, if: :new_record?
+  before_validation :normalize_name, if: -> { name.present? }
   before_validation :generate_slug, if: -> { slug.blank? && name.present? }
 
   # Scopes
@@ -42,6 +48,14 @@ class Topic < ApplicationRecord
 
   def to_param
     slug
+  end
+
+  def set_default_status
+    self.status ||= :active
+  end
+
+  def normalize_name
+    self.name = name.strip.titleize
   end
 
   def generate_slug

@@ -2,7 +2,7 @@
 
 one:
   seoable: one
-  seoable_type: Seoable
+  seoable_type: Post
   title: MyString
   description: MyString
   keywords: MyString
@@ -18,7 +18,7 @@ one:
 
 two:
   seoable: two
-  seoable_type: Seoable
+  seoable_type: Product
   title: MyString
   description: MyString
   keywords: MyString

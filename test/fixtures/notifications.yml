@@ -2,24 +2,24 @@
 
 one:
   user: one
-  actor: one
+  actor: two
   notifiable: one
-  notifiable_type: Notifiable
+  notifiable_type: Product
   notification_type: 1
-  title: MyString
+  title: New Product Upvote
   body: MyText
-  action_url: MyString
+  action_url: https://example.com/products/1
   read_at: 2025-10-13 00:44:25
   email_sent_at: 2025-10-13 00:44:25
 
 two:
   user: two
-  actor: two
-  notifiable: two
-  notifiable_type: Notifiable
+  actor: one
+  notifiable: one
+  notifiable_type: Post
   notification_type: 1
-  title: MyString
+  title: New Comment
   body: MyText
-  action_url: MyString
+  action_url: https://example.com/posts/1
   read_at: 2025-10-13 00:44:25
   email_sent_at: 2025-10-13 00:44:25

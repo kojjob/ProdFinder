@@ -2,12 +2,12 @@
 
 one:
   follower: one
-  follower_type: Follower
-  followee: one
-  followee_type: Followee
+  follower_type: User
+  followee: two
+  followee_type: User
 
 two:
   follower: two
-  follower_type: Follower
-  followee: two
-  followee_type: Followee
+  follower_type: User
+  followee: one
+  followee_type: User

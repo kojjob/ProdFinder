@@ -33,7 +33,14 @@ class CollectionProduct < ApplicationRecord
   # - Notes provide context for why product was added
 
   def set_default_position
-    self.position ||= collection.collection_products.maximum(:position).to_i + 1
+    # Guard against missing collection association and use foreign key directly
+    max_position = if collection_id.present?
+      CollectionProduct.where(collection_id: collection_id).maximum(:position)
+    else
+      0
+    end
+
+    self.position ||= (max_position.to_i + 1)
   end
 
   private

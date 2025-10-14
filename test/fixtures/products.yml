@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: AI Product One
+  slug: ai-product-one
+  tagline: Amazing AI product
+  description: This is an amazing AI product description
+  website_url: https://example.com/ai-product-one
+  launch_date: 2025-10-13
+  status: 1
+  upvotes_count: 1
+  comments_count: 1
+  views_count: 1
+  maker_inside: false
+  user: one
+
+two:
+  name: Design Tool Two
+  slug: design-tool-two
+  tagline: Amazing design tool
+  description: This is an amazing design tool description
+  website_url: https://example.com/design-tool-two
+  launch_date: 2025-10-13
+  status: 1
+  upvotes_count: 1
+  comments_count: 1
+  views_count: 1
+  maker_inside: false
+  user: two

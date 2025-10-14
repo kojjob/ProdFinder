@@ -83,9 +83,10 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "should validate unique email" do
-    @user.save!
+    # Create a user in the database first
+    existing_user = users(:one)
     duplicate_user = User.new(
-      email: @user.email,
+      email: existing_user.email,
       username: "different",
       full_name: "Different User"
     )
@@ -94,10 +95,11 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "should validate unique username" do
-    @user.save!
+    # Create a user in the database first
+    existing_user = users(:one)
     duplicate_user = User.new(
       email: "different@example.com",
-      username: @user.username,
+      username: existing_user.username,
       full_name: "Different User"
     )
     assert_not duplicate_user.valid?

@@ -16,7 +16,7 @@ class Comment < ApplicationRecord
   belongs_to :product, counter_cache: true
   belongs_to :user
   belongs_to :parent, class_name: "Comment", optional: true
-  has_many :replies, class_name: "Comment", foreign_key: "parent_id", dependent: :destroy
+  has_many :replies, class_name: "Comment", foreign_key: "parent_id"
   has_many :comment_upvotes, dependent: :destroy
   has_many :upvoters, through: :comment_upvotes, source: :user
 
@@ -35,6 +35,7 @@ class Comment < ApplicationRecord
   # Callbacks
   after_create :mark_product_maker_inside
   after_create :notify_participants
+  before_destroy :soft_delete_replies
 
   # Business Rules
   # - Makers automatically get "Maker" badge on their comments
@@ -105,5 +106,13 @@ class Comment < ApplicationRecord
   def notify_participants
     # TODO: Implement notification system
     # NotificationService.notify_comment(self)
+  end
+
+  def soft_delete_replies
+    return unless deleted?
+
+    replies.active.each do |reply|
+      reply.soft_delete!
+    end
   end
 end

@@ -1,13 +1,13 @@
 <% content_for :title, "Sign In - ProdFinder" %>
 
 <div class="auth-container">
-  <div class="auth-form">
+  <div class="auth-form animate-fade-in-scale">
     <!-- Header -->
     <div class="auth-header">
-      <div class="flex justify-center mb-6">
-        <!-- Logo placeholder - replace with your actual logo -->
-        <div class="w-12 h-12 bg-primary-600 rounded-xl flex items-center justify-center">
-          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="flex justify-center mb-8">
+        <!-- Enhanced logo with gradient and animation -->
+        <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 animate-float">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
           </svg>
         </div>
@@ -22,7 +22,7 @@
     <!-- Sign In Form -->
     <%= form_for(resource, as: resource_name, url: session_path(resource_name),
                   html: {
-                    class: "space-y-6",
+                    class: "space-y-8",
                     data: {
                       controller: "auth-form",
                       turbo_frame: "auth_form"
@@ -37,22 +37,22 @@
                 autofocus: true,
                 autocomplete: "email",
                 required: true,
-                placeholder: "Enter your email address",
-                class: "form-input",
+                placeholder: "you@example.com",
+                class: "form-input pr-12",
                 data: {
                   action: "input->auth-form#validateEmail blur->auth-form#validateEmail",
                   auth_form_target: "emailInput"
                 } %>
           <!-- Email validation icon -->
-          <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-            <svg class="h-5 w-5 text-success-400 hidden" data-auth-form-target="emailValidIcon" fill="currentColor" viewBox="0 0 20 20">
+          <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-emerald-500 hidden transition-all duration-200" data-auth-form-target="emailValidIcon" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.236 4.53L8.23 10.661a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
             </svg>
           </div>
         </div>
         <!-- Email validation message -->
         <div class="field-error hidden" data-auth-form-target="emailError">
-          <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+          <svg class="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
           </svg>
           <span data-auth-form-target="emailErrorText"></span>
@@ -61,9 +61,9 @@
 
       <!-- Remember Me -->
       <% if devise_mapping.rememberable? %>
-        <div class="flex items-center">
+        <div class="flex items-center space-x-3">
           <%= f.check_box :remember_me, class: "checkbox" %>
-          <%= f.label :remember_me, "Keep me signed in for 30 days", class: "ml-2 text-sm text-secondary-700" %>
+          <%= f.label :remember_me, "Keep me signed in for 30 days", class: "text-sm text-slate-600 font-medium" %>
         </div>
       <% end %>
 
@@ -100,16 +100,20 @@
       </div>
     </div>
 
-    <!-- Help Text -->
-    <div class="mt-6 text-center">
-      <div class="bg-primary-50 rounded-lg p-4">
+    <!-- Enhanced Help Text -->
+    <div class="mt-8 text-center">
+      <div class="bg-gradient-to-r from-primary-50/80 to-blue-50/80 backdrop-blur-sm rounded-2xl p-6 border border-primary-100/50 shadow-soft">
         <div class="flex items-start">
-          <svg class="h-5 w-5 text-primary-400 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-          </svg>
-          <div class="text-left">
-            <p class="text-sm text-primary-800 font-medium mb-1">How magic links work</p>
-            <p class="text-xs text-primary-700">
+          <div class="flex-shrink-0">
+            <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-blue-600 rounded-xl flex items-center justify-center shadow-md">
+              <svg class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </div>
+          <div class="ml-4 text-left">
+            <p class="text-base text-slate-800 font-semibold mb-2">How magic links work</p>
+            <p class="text-sm text-slate-600 leading-relaxed">
               We'll send a secure link to your email. Click it to sign in instantly - no password needed!
             </p>
           </div>

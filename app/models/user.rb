@@ -48,7 +48,7 @@ class User < ApplicationRecord
   # TODO: Add country code validation with ISO3166 gem
   # validates :country_code, inclusion: { in: ISO3166::Country.codes }, allow_blank: true
 
-  # Passwordless authentication - no password needed
+  # Passwordless authentication using devise-passwordless gem
 
   # Scopes
   scope :makers, -> { where(maker_status: true) }

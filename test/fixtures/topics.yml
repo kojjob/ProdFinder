@@ -1,22 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  slug: MyString
-  description: MyText
-  icon: MyString
-  color: MyString
+  name: AI Tools
+  slug: ai-tools
+  description: Artificial intelligence tools and products
+  icon: robot
+  color: blue
   products_count: 1
   followers_count: 1
   position: 1
   featured: false
 
 two:
-  name: MyString
-  slug: MyString
-  description: MyText
-  icon: MyString
-  color: MyString
+  name: Productivity
+  slug: productivity
+  description: Productivity tools and apps
+  icon: clock
+  color: green
   products_count: 1
   followers_count: 1
   position: 1

@@ -1,19 +1,19 @@
 <% if resource.errors.any? %>
   <div id="error_explanation"
-       class="alert alert-error mb-6 animate-slide-up"
+       class="alert alert-error mb-6 "
        data-turbo-cache="false"
        role="alert"
        aria-live="polite">
     <div class="flex items-start">
       <!-- Error Icon -->
       <div class="flex-shrink-0">
-        <svg class="h-5 w-5 text-error-400 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <svg class="h-5 w-5 text-red-400 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
         </svg>
       </div>
 
       <div class="ml-3 flex-1">
-        <h3 class="text-sm font-semibold text-error-800 mb-2">
+        <h3 class="text-sm font-semibold text-red-800 mb-2">
           <% if resource.errors.count == 1 %>
             Please fix the following issue:
           <% else %>
@@ -21,10 +21,10 @@
           <% end %>
         </h3>
 
-        <ul class="space-y-1 text-sm text-error-700">
+        <ul class="space-y-1 text-sm text-red-700">
           <% resource.errors.full_messages.each do |message| %>
             <li class="flex items-start">
-              <span class="inline-block w-1 h-1 bg-error-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+              <span class="inline-block w-1 h-1 bg-red-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
               <%= message %>
             </li>
           <% end %>

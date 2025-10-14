@@ -16,4 +16,41 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "pages#home"
+
+  # Static pages
+  get "community", to: "pages#community", as: :community
+  get "pricing", to: "pages#pricing", as: :pricing
+  get "maker_guide", to: "pages#maker_guide", as: :maker_guide
+
+  # User resources
+  resources :users, only: [ :show, :edit, :update ] do
+    member do
+      get :products
+    end
+  end
+
+  # Product resources
+  resources :products, only: [ :index, :show, :new, :create, :edit, :update ] do
+    resources :comments, only: [ :create, :destroy ]
+    resources :upvotes, only: [ :create, :destroy ]
+  end
+
+  # Category resources
+  resources :categories, only: [ :index, :show ]
+
+  # Topic resources
+  resources :topics, only: [ :index, :show ]
+
+  # Collection resources
+  resources :collections, only: [ :index, :show, :new, :create, :edit, :update ]
+
+  # Dashboard
+  get "dashboard", to: "dashboard#index", as: :dashboard
+
+  # Settings
+  get "settings", to: "settings#index", as: :settings
+  patch "settings", to: "settings#update"
+
+  # My Products
+  get "my_products", to: "products#my_products", as: :my_products
 end

@@ -65,8 +65,8 @@
 
   <!-- OAuth Providers -->
   <%- if devise_mapping.omniauthable? %>
-    <div class="pt-4 border-t border-secondary-200">
-      <p class="text-center text-sm text-secondary-600 mb-3">Or continue with</p>
+    <div class="pt-4 border-t border-gray-200">
+      <p class="text-center text-sm text-gray-600 mb-3">Or continue with</p>
       <div class="space-y-2">
         <%- resource_class.omniauth_providers.each do |provider| %>
           <%= button_to omniauth_authorize_path(resource_name, provider),

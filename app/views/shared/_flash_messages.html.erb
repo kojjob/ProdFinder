@@ -1,5 +1,5 @@
 <% if notice %>
-  <div class="alert alert-success mb-6 animate-slide-up" 
+  <div class="alert alert-success mb-6 " 
        role="alert"
        aria-live="polite"
        data-controller="auto-dismiss"
@@ -37,7 +37,7 @@
 <% end %>
 
 <% if alert %>
-  <div class="alert alert-error mb-6 animate-slide-up" 
+  <div class="alert alert-error mb-6 " 
        role="alert"
        aria-live="assertive"
        data-controller="auto-dismiss"
@@ -45,13 +45,13 @@
     <div class="flex items-start">
       <!-- Error Icon -->
       <div class="flex-shrink-0">
-        <svg class="h-5 w-5 text-error-400 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <svg class="h-5 w-5 text-red-400 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
         </svg>
       </div>
       
       <div class="ml-3 flex-1">
-        <p class="text-sm font-medium text-error-800">
+        <p class="text-sm font-medium text-red-800">
           <%= alert %>
         </p>
       </div>
@@ -60,7 +60,7 @@
       <div class="ml-auto pl-3">
         <div class="-mx-1.5 -my-1.5">
           <button type="button" 
-                  class="inline-flex rounded-md p-1.5 text-error-500 hover:bg-error-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-error-50 focus:ring-error-600"
+                  class="inline-flex rounded-md p-1.5 text-red-500 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-error-50 focus:ring-error-600"
                   data-action="click->auto-dismiss#dismiss"
                   aria-label="Dismiss">
             <span class="sr-only">Dismiss</span>

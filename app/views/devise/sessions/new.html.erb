@@ -1,20 +1,20 @@
 <% content_for :title, "Sign In - ProdFinder" %>
 
 <div class="auth-container">
-  <div class="auth-form animate-fade-in-scale" data-controller="auth-form">
+  <div class="auth-form " data-controller="auth-form">
     <!-- Minimal Header -->
     <div class="text-center mb-12">
       <!-- Subtle logo mark -->
-      <div class="inline-flex items-center justify-center w-14 h-14 mb-6 bg-gradient-to-br from-primary-500/10 to-primary-600/10 dark:from-primary-500/20 dark:to-primary-600/20 rounded-full backdrop-blur-sm border border-primary-200/50 dark:border-primary-500/30 animate-fade-in-scale">
-        <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="inline-flex items-center justify-center w-14 h-14 mb-6 bg-gradient-to-br from-blue-500/10 to-blue-600/10 rounded-full backdrop-blur-sm border border-blue-200/50 ">
+        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
         </svg>
       </div>
 
-      <h1 class="text-3xl font-semibold text-secondary-900 dark:text-white mb-3 tracking-tight">
+      <h1 class="text-3xl font-semibold text-gray-900 mb-3 tracking-tight">
         Welcome back
       </h1>
-      <p class="text-base text-secondary-500 dark:text-dark-text-secondary font-normal">
+      <p class="text-base text-gray-500 font-normal">
         Enter your email to sign in or create an account
       </p>
     </div>
@@ -23,22 +23,22 @@
     <%= render "shared/flash_messages" %>
 
     <!-- Success State (hidden by default) -->
-    <div class="hidden mb-8 animate-fade-in-scale" data-auth-form-target="successState">
-      <div class="bg-gradient-to-br from-emerald-50/80 to-green-50/80 dark:from-emerald-900/20 dark:to-green-900/20 backdrop-blur-sm rounded-3xl p-8 border border-emerald-200/50 dark:border-emerald-500/30 shadow-soft dark:shadow-dark-soft text-center">
+    <div class="hidden mb-8 " data-auth-form-target="successState">
+      <div class="bg-gradient-to-br from-emerald-50/80 to-green-50/80 backdrop-blur-sm rounded-3xl p-8 border border-emerald-200/50 shadow-sm  text-center">
         <!-- Success checkmark animation -->
-        <div class="inline-flex items-center justify-center w-16 h-16 mb-5 bg-gradient-to-br from-emerald-500 to-green-600 dark:from-emerald-600 dark:to-green-700 rounded-full shadow-glow animate-scale-in">
+        <div class="inline-flex items-center justify-center w-16 h-16 mb-5 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full shadow-md ">
           <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
           </svg>
         </div>
 
-        <h2 class="text-xl font-semibold text-secondary-900 dark:text-white mb-2">
+        <h2 class="text-xl font-semibold text-gray-900 mb-2">
           Check your inbox
         </h2>
-        <p class="text-sm text-secondary-600 dark:text-dark-text-secondary leading-relaxed">
-          We've sent a magic link to <span class="font-medium text-secondary-900 dark:text-white" data-auth-form-target="emailDisplay"></span>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          We've sent a magic link to <span class="font-medium text-gray-900" data-auth-form-target="emailDisplay"></span>
         </p>
-        <p class="text-xs text-secondary-500 dark:text-dark-text-secondary mt-3">
+        <p class="text-xs text-gray-500 mt-3">
           The link will expire in 20 minutes
         </p>
       </div>
@@ -63,7 +63,7 @@
                 autocomplete: "email",
                 required: true,
                 placeholder: "Enter your email address",
-                class: "form-input h-16 text-base pr-14 placeholder:text-secondary-400",
+                class: "form-input h-16 text-base pr-14 placeholder:text-gray-400",
                 data: {
                   action: "input->auth-form#validateEmail blur->auth-form#validateEmail",
                   auth_form_target: "emailInput"
@@ -92,7 +92,7 @@
       <% if devise_mapping.rememberable? %>
         <div class="flex items-center space-x-2.5" data-auth-form-target="formFields">
           <%= f.check_box :remember_me, class: "checkbox" %>
-          <%= f.label :remember_me, "Keep me signed in", class: "text-sm text-secondary-600 dark:text-dark-text-secondary font-normal" %>
+          <%= f.label :remember_me, "Keep me signed in", class: "text-sm text-gray-600 font-normal" %>
         </div>
       <% end %>
 
@@ -107,8 +107,8 @@
 
         <!-- Loading state with Apple-style spinner -->
         <div class="hidden" data-auth-form-target="loadingMessage">
-          <div class="flex items-center justify-center space-x-3 text-sm text-secondary-500 dark:text-dark-text-secondary bg-secondary-50/50 dark:bg-dark-elevated/50 backdrop-blur-sm rounded-2xl py-4 px-6 border border-secondary-200/50 dark:border-dark-border">
-            <svg class="animate-spin h-5 w-5 text-primary-600 dark:text-primary-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <div class="flex items-center justify-center space-x-3 text-sm text-gray-500 bg-gray-50/50 backdrop-blur-sm rounded-2xl py-4 px-6 border border-gray-200/50">
+            <svg class="animate-spin h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
               <path class="opacity-80" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
@@ -119,8 +119,8 @@
     <% end %>
 
     <!-- Minimal Footer Links -->
-    <div class="mt-10 pt-8 border-t border-secondary-200/60 dark:border-dark-border">
-      <p class="text-center text-sm text-secondary-500 dark:text-dark-text-secondary">
+    <div class="mt-10 pt-8 border-t border-gray-200/60">
+      <p class="text-center text-sm text-gray-500">
         New to ProdFinder?
         <%= link_to "Create an account", new_registration_path(resource_name),
               class: "link font-medium ml-1" %>
@@ -129,10 +129,10 @@
 
     <!-- Subtle Help Text -->
     <div class="mt-8">
-      <div class="text-center bg-secondary-50/40 dark:bg-dark-elevated/40 backdrop-blur-sm rounded-2xl py-4 px-6 border border-secondary-100/50 dark:border-dark-border">
-        <p class="text-xs text-secondary-500 dark:text-dark-text-secondary leading-relaxed">
+      <div class="text-center bg-gray-50/40 backdrop-blur-sm rounded-2xl py-4 px-6 border border-gray-100/50">
+        <p class="text-xs text-gray-500 leading-relaxed">
           <span class="inline-flex items-center">
-            <svg class="h-3.5 w-3.5 mr-1.5 text-secondary-400 dark:text-dark-text-secondary" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="h-3.5 w-3.5 mr-1.5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clip-rule="evenodd" />
             </svg>
             We'll email you a secure link to sign in instantly

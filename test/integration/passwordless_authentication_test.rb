@@ -30,7 +30,7 @@ class PasswordlessAuthenticationTest < ActionDispatch::IntegrationTest
     # Should send confirmation email with magic link
     assert_equal 1, ActionMailer::Base.deliveries.size
     email = ActionMailer::Base.deliveries.first
-    assert_equal ["newuser@example.com"], email.to
+    assert_equal [ "newuser@example.com" ], email.to
     assert_match(/confirm/i, email.subject)
 
     # Email should contain magic link
@@ -50,7 +50,7 @@ class PasswordlessAuthenticationTest < ActionDispatch::IntegrationTest
     # Should send magic link email
     assert_equal 1, ActionMailer::Base.deliveries.size
     email = ActionMailer::Base.deliveries.first
-    assert_equal [user.email], email.to
+    assert_equal [ user.email ], email.to
 
     # Extract magic link from email
     email_body = email.body.encoded
@@ -124,7 +124,7 @@ class PasswordlessAuthenticationTest < ActionDispatch::IntegrationTest
     # Should send magic link for sign-in
     assert_equal 1, ActionMailer::Base.deliveries.size
     signin_email = ActionMailer::Base.deliveries.last
-    assert_equal [user.email], signin_email.to
+    assert_equal [ user.email ], signin_email.to
   end
 
   test "invalid email shows appropriate error" do
@@ -267,8 +267,8 @@ class PasswordlessAuthenticationTest < ActionDispatch::IntegrationTest
     assert_equal 2, ActionMailer::Base.deliveries.size
 
     # Both emails should be to the same user
-    assert_equal [user.email], ActionMailer::Base.deliveries.first.to
-    assert_equal [user.email], ActionMailer::Base.deliveries.last.to
+    assert_equal [ user.email ], ActionMailer::Base.deliveries.first.to
+    assert_equal [ user.email ], ActionMailer::Base.deliveries.last.to
   end
 
   test "non-existent email for sign-in does not reveal user existence" do

@@ -107,10 +107,16 @@
           <!-- User Menu -->
           <div class="relative group" data-controller="dropdown">
             <button class="flex items-center space-x-3 text-gray-700 hover:text-red-600 px-3 py-2 rounded-lg hover:bg-gray-50 transition-all duration-200" data-action="click->dropdown#toggle click@window->dropdown#hide">
-              <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-teal-600 rounded-full flex items-center justify-center">
-                <span class="text-white text-sm font-medium">
-                  <%= current_user.full_name.first.upcase %>
-                </span>
+              <div class="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-red-500 to-teal-600">
+                <% if current_user.avatar.attached? %>
+                  <%= image_tag current_user.avatar.variant(resize_to_limit: [32, 32]), 
+                      class: "w-full h-full object-cover", 
+                      alt: current_user.full_name %>
+                <% else %>
+                  <span class="text-white text-sm font-medium">
+                    <%= current_user.avatar_initials %>
+                  </span>
+                <% end %>
               </div>
               <span class="hidden md:block text-sm font-medium"><%= current_user.full_name %></span>
               <svg class="w-4 h-4 transform group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -121,10 +127,16 @@
               <!-- User Info Header -->
               <div class="px-4 py-3 border-b border-gray-100">
                 <div class="flex items-center space-x-3">
-                  <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-teal-600 rounded-full flex items-center justify-center">
-                    <span class="text-white font-medium">
-                      <%= current_user.full_name.first.upcase %>
-                    </span>
+                  <div class="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-red-500 to-teal-600">
+                    <% if current_user.avatar.attached? %>
+                      <%= image_tag current_user.avatar.variant(resize_to_limit: [40, 40]), 
+                          class: "w-full h-full object-cover", 
+                          alt: current_user.full_name %>
+                    <% else %>
+                      <span class="text-white font-medium">
+                        <%= current_user.avatar_initials %>
+                      </span>
+                    <% end %>
                   </div>
                   <div>
                     <div class="font-medium text-gray-900"><%= current_user.full_name %></div>
@@ -197,10 +209,16 @@
           <!-- Mobile User Info -->
           <div class="px-3 py-2 border-b border-gray-100">
             <div class="flex items-center space-x-3">
-              <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-teal-600 rounded-full flex items-center justify-center">
-                <span class="text-white text-sm font-medium">
-                  <%= current_user.full_name.first.upcase %>
-                </span>
+              <div class="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-red-500 to-teal-600">
+                <% if current_user.avatar.attached? %>
+                  <%= image_tag current_user.avatar.variant(resize_to_limit: [32, 32]), 
+                      class: "w-full h-full object-cover", 
+                      alt: current_user.full_name %>
+                <% else %>
+                  <span class="text-white text-sm font-medium">
+                    <%= current_user.avatar_initials %>
+                  </span>
+                <% end %>
               </div>
               <div>
                 <div class="font-medium text-gray-900 text-sm"><%= current_user.full_name %></div>

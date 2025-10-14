@@ -1,25 +1,22 @@
 <% content_for :title, "Edit Profile - AfriHunt" %>
-
 <style>
   @keyframes slide-up {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  
+
   @keyframes pulse-glow {
     0%, 100% { opacity: 0.5; }
     50% { opacity: 0.8; }
   }
-  
+
   .animate-slide-up { animation: slide-up 0.6s ease-out forwards; }
   .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
 </style>
-
 <div class="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30">
   <!-- Header -->
   <div class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 text-white">
     <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-    
     <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div class="text-center">
         <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 animate-slide-up">
@@ -28,7 +25,6 @@
           </svg>
           <span class="text-sm font-semibold tracking-wide">Profile Settings</span>
         </div>
-        
         <h1 class="text-4xl md:text-5xl font-extrabold mb-4 animate-slide-up" style="animation-delay: 0.1s; letter-spacing: -0.02em;">
           Edit Your Profile
         </h1>
@@ -38,7 +34,6 @@
       </div>
     </div>
   </div>
-
   <!-- Main Content -->
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <!-- Form Card -->
@@ -66,19 +61,16 @@
             </div>
           </div>
         <% end %>
-
         <!-- Section 1: Basic Information -->
         <div>
           <h2 class="text-2xl font-extrabold text-gray-900 mb-6 flex items-center" style="letter-spacing: -0.01em;">
             <span class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-xl flex items-center justify-center text-sm font-bold mr-3 shadow-lg">1</span>
             Basic Information
           </h2>
-
           <div class="space-y-6">
             <!-- Avatar Upload -->
             <div>
               <%= f.label :avatar, "Profile Picture", class: "block text-sm font-bold text-gray-700 mb-4" %>
-
               <div class="flex flex-col md:flex-row items-start md:items-center gap-6">
                 <!-- Current Avatar Preview -->
                 <div class="relative group">
@@ -91,7 +83,6 @@
                     <% end %>
                   </div>
                 </div>
-
                 <!-- Upload Controls -->
                 <div class="flex-1">
                   <div class="relative">
@@ -100,14 +91,12 @@
                         class: "hidden",
                         id: "avatar-upload",
                         onchange: "previewAvatar(event)" %>
-
                     <label for="avatar-upload" class="inline-flex items-center px-6 py-3 border-2 border-blue-500 rounded-xl text-base font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 hover:border-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500/20 transition-all duration-200 cursor-pointer">
                       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                       </svg>
                       Choose Image
                     </label>
-
                     <% if @user.avatar.attached? %>
                       <button type="button" onclick="removeAvatar()" class="ml-3 inline-flex items-center px-6 py-3 border-2 border-red-300 rounded-xl text-base font-bold text-red-600 bg-red-50 hover:bg-red-100 hover:border-red-400 focus:outline-none focus:ring-4 focus:ring-red-500/20 transition-all duration-200">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -117,7 +106,6 @@
                       </button>
                     <% end %>
                   </div>
-
                   <p class="mt-3 text-sm text-gray-500">
                     <span class="font-semibold">Recommended:</span> Square image, at least 400x400px<br>
                     <span class="font-semibold">Formats:</span> JPG, PNG, GIF, or WebP (max 5MB)
@@ -135,7 +123,6 @@
                   maxlength: 100 %>
               <p class="mt-2 text-sm text-gray-500">Your name as it will appear across AfriHunt (2-100 characters)</p>
             </div>
-
             <!-- Username -->
             <div>
               <%= f.label :username, "Username", class: "block text-sm font-bold text-gray-700 mb-2" %>
@@ -153,7 +140,6 @@
               </div>
               <p class="mt-2 text-sm text-gray-500">Your unique identifier (3-30 characters, letters, numbers, and underscores only)</p>
             </div>
-
             <!-- Bio -->
             <div>
               <%= f.label :bio, "Bio", class: "block text-sm font-bold text-gray-700 mb-2" %>
@@ -169,14 +155,12 @@
             </div>
           </div>
         </div>
-
         <!-- Section 2: Social Links -->
         <div class="pt-8 border-t-2 border-gray-100">
           <h2 class="text-2xl font-extrabold text-gray-900 mb-6 flex items-center" style="letter-spacing: -0.01em;">
             <span class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 text-white rounded-xl flex items-center justify-center text-sm font-bold mr-3 shadow-lg">2</span>
             Social Links
           </h2>
-
           <div class="space-y-6">
             <!-- Website -->
             <div>
@@ -193,7 +177,6 @@
               </div>
               <p class="mt-2 text-sm text-gray-500">Your personal website or portfolio</p>
             </div>
-
             <!-- Twitter -->
             <div>
               <%= f.label :twitter_handle, "Twitter", class: "block text-sm font-bold text-gray-700 mb-2" %>
@@ -211,25 +194,8 @@
               </div>
               <p class="mt-2 text-sm text-gray-500">Your Twitter handle (with or without @)</p>
             </div>
-
-            <!-- GitHub -->
-            <div>
-              <%= f.label :github, "GitHub", class: "block text-sm font-bold text-gray-700 mb-2" %>
-              <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-                  <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
-                  </svg>
-                </div>
-                <%= f.text_field :github, 
-                    placeholder: "username",
-                    class: "w-full pl-14 pr-5 py-4 border-2 border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 text-base" %>
-              </div>
-              <p class="mt-2 text-sm text-gray-500">Your GitHub username</p>
-            </div>
           </div>
         </div>
-
         <!-- Help Text -->
         <div class="pt-8 border-t-2 border-gray-100">
           <div class="bg-gradient-to-br from-blue-50 to-purple-50 border-l-4 border-blue-500 p-6 rounded-xl">
@@ -251,7 +217,6 @@
             </div>
           </div>
         </div>
-
         <!-- Form Actions -->
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t-2 border-gray-100">
           <%= link_to user_path(@user), class: "w-full sm:w-auto order-2 sm:order-1 px-8 py-4 border-2 border-gray-300 rounded-xl text-base font-bold text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-4 focus:ring-gray-300/50 transition-all duration-200 text-center" do %>
@@ -260,12 +225,10 @@
             </svg>
             Cancel
           <% end %>
-          
           <%= f.submit "Save Changes", class: "w-full sm:w-auto order-1 sm:order-2 group relative px-10 py-4 border-2 border-transparent rounded-xl text-base font-bold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-blue-500/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5" %>
         </div>
       <% end %>
     </div>
-
     <!-- Back to Profile -->
     <div class="mt-8 text-center">
       <%= link_to user_path(@user), class: "inline-flex items-center text-base font-semibold text-gray-600 hover:text-gray-900 transition-colors duration-200" do %>
@@ -277,7 +240,6 @@
     </div>
   </div>
 </div>
-
 <script>
   // Character counter for bio
   document.addEventListener('DOMContentLoaded', function() {

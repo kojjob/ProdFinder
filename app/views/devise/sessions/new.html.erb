@@ -1,44 +1,44 @@
-<% content_for :title, "Sign In - ProdFinder" %>
+<% content_for :title, "Sign In - AfriHunt" %>
 
 <div class="auth-container">
-  <div class="auth-form " data-controller="auth-form">
-    <!-- Minimal Header -->
+  <div class="auth-form" data-controller="auth-form">
+    <!-- Premium Header with Red-Blue-Teal Gradient -->
     <div class="text-center mb-12">
-      <!-- Subtle logo mark -->
-      <div class="inline-flex items-center justify-center w-14 h-14 mb-6 bg-gradient-to-br from-blue-500/10 to-blue-600/10 rounded-full backdrop-blur-sm border border-blue-200/50 ">
-        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+      <!-- AfriHunt Logo Mark with Gradient -->
+      <div class="inline-flex items-center justify-center w-16 h-16 mb-6 bg-gradient-to-br from-red-500/10 via-blue-500/10 to-teal-500/10 rounded-2xl backdrop-blur-sm border border-red-200/30 shadow-sm">
+        <svg class="w-8 h-8 text-transparent bg-clip-text bg-gradient-to-br from-red-600 via-blue-600 to-teal-500" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
         </svg>
       </div>
 
-      <h1 class="text-3xl font-semibold text-gray-900 mb-3 tracking-tight">
+      <h1 class="text-4xl font-bold text-gray-900 mb-3 tracking-tight">
         Welcome back
       </h1>
-      <p class="text-base text-gray-500 font-normal">
-        Enter your email to sign in or create an account
+      <p class="text-lg text-gray-600 font-normal">
+        Sign in to discover amazing African products
       </p>
     </div>
 
     <!-- Flash Messages -->
     <%= render "shared/flash_messages" %>
 
-    <!-- Success State (hidden by default) -->
-    <div class="hidden mb-8 " data-auth-form-target="successState">
-      <div class="bg-gradient-to-br from-emerald-50/80 to-green-50/80 backdrop-blur-sm rounded-3xl p-8 border border-emerald-200/50 shadow-sm  text-center">
-        <!-- Success checkmark animation -->
-        <div class="inline-flex items-center justify-center w-16 h-16 mb-5 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full shadow-md ">
+    <!-- Success State (hidden by default) - Teal Theme -->
+    <div class="hidden mb-8" data-auth-form-target="successState">
+      <div class="bg-gradient-to-br from-teal-50/80 to-teal-100/60 backdrop-blur-sm rounded-3xl p-8 border border-teal-200/50 shadow-lg text-center">
+        <!-- Success checkmark animation with Teal -->
+        <div class="inline-flex items-center justify-center w-16 h-16 mb-5 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full shadow-md">
           <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
           </svg>
         </div>
 
-        <h2 class="text-xl font-semibold text-gray-900 mb-2">
+        <h2 class="text-xl font-bold text-gray-900 mb-2">
           Check your inbox
         </h2>
-        <p class="text-sm text-gray-600 leading-relaxed">
-          We've sent a magic link to <span class="font-medium text-gray-900" data-auth-form-target="emailDisplay"></span>
+        <p class="text-base text-gray-700 leading-relaxed">
+          We've sent a magic link to <span class="font-semibold text-teal-700" data-auth-form-target="emailDisplay"></span>
         </p>
-        <p class="text-xs text-gray-500 mt-3">
+        <p class="text-sm text-gray-600 mt-3">
           The link will expire in 20 minutes
         </p>
       </div>
@@ -54,24 +54,24 @@
                     }
                   }) do |f| %>
 
-      <!-- Email Field -->
+      <!-- Email Field with Enhanced Styling -->
       <div class="form-field" data-auth-form-target="formFields">
-        <%= f.label :email, "Email address", class: "form-label sr-only" %>
+        <%= f.label :email, "Email address", class: "block text-sm font-semibold text-gray-700 mb-2" %>
         <div class="relative group">
           <%= f.email_field :email,
                 autofocus: true,
                 autocomplete: "email",
                 required: true,
-                placeholder: "Enter your email address",
-                class: "form-input h-16 text-base pr-14 placeholder:text-gray-400",
+                placeholder: "you@example.com",
+                class: "w-full h-16 px-5 text-lg rounded-2xl border-2 border-gray-200 focus:border-red-500 focus:ring-4 focus:ring-red-100 transition-all duration-200 placeholder:text-gray-400 hover:border-gray-300",
                 data: {
                   action: "input->auth-form#validateEmail blur->auth-form#validateEmail",
                   auth_form_target: "emailInput"
                 } %>
 
-          <!-- Validation icon with smooth transition -->
+          <!-- Validation icon with Teal color -->
           <div class="absolute inset-y-0 right-0 pr-5 flex items-center pointer-events-none">
-            <svg class="h-5 w-5 text-emerald-500 opacity-0 scale-0 transition-all duration-300"
+            <svg class="h-6 w-6 text-teal-500 opacity-0 scale-0 transition-all duration-300"
                  data-auth-form-target="emailValidIcon"
                  fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.236 4.53L8.23 10.661a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
@@ -79,64 +79,64 @@
           </div>
         </div>
 
-        <!-- Validation message -->
-        <div class="field-error hidden mt-3" data-auth-form-target="emailError">
-          <svg class="h-4 w-4 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-          </svg>
-          <span data-auth-form-target="emailErrorText"></span>
+        <!-- Validation message with Red color -->
+        <div class="hidden mt-3 text-red-600 text-sm" data-auth-form-target="emailError">
+          <div class="flex items-center">
+            <svg class="h-5 w-5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+            <span data-auth-form-target="emailErrorText"></span>
+          </div>
         </div>
       </div>
 
-      <!-- Remember Me (more minimal) -->
+      <!-- Remember Me with Teal accent -->
       <% if devise_mapping.rememberable? %>
-        <div class="flex items-center space-x-2.5" data-auth-form-target="formFields">
-          <%= f.check_box :remember_me, class: "checkbox" %>
-          <%= f.label :remember_me, "Keep me signed in", class: "text-sm text-gray-600 font-normal" %>
+        <div class="flex items-center space-x-3" data-auth-form-target="formFields">
+          <%= f.check_box :remember_me, class: "w-5 h-5 text-teal-600 border-gray-300 rounded focus:ring-teal-500 focus:ring-2" %>
+          <%= f.label :remember_me, "Keep me signed in for 30 days", class: "text-base text-gray-700 font-medium cursor-pointer" %>
         </div>
       <% end %>
 
-      <!-- Submit Button with enhanced hover state -->
+      <!-- Submit Button with Red-Blue-Teal Gradient -->
       <div class="space-y-4" data-auth-form-target="formFields">
         <%= f.submit "Send Magic Link",
-              class: "btn btn-primary w-full h-14 text-base font-semibold tracking-tight group",
+              class: "w-full h-16 text-lg font-bold text-white bg-gradient-to-r from-red-600 via-blue-600 to-teal-500 rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer",
               data: {
                 auth_form_target: "submitButton",
                 action: "click->auth-form#handleSubmit"
               } %>
 
-        <!-- Loading state with Apple-style spinner -->
+        <!-- Loading state with Red spinner -->
         <div class="hidden" data-auth-form-target="loadingMessage">
-          <div class="flex items-center justify-center space-x-3 text-sm text-gray-500 bg-gray-50/50 backdrop-blur-sm rounded-2xl py-4 px-6 border border-gray-200/50">
-            <svg class="animate-spin h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <div class="flex items-center justify-center space-x-3 text-base text-gray-700 bg-gray-50 backdrop-blur-sm rounded-2xl py-5 px-6 border-2 border-gray-200">
+            <svg class="animate-spin h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
               <path class="opacity-80" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <span class="font-medium">Sending magic link...</span>
+            <span class="font-semibold">Sending magic link...</span>
           </div>
         </div>
       </div>
     <% end %>
 
-    <!-- Minimal Footer Links -->
-    <div class="mt-10 pt-8 border-t border-gray-200/60">
-      <p class="text-center text-sm text-gray-500">
-        New to ProdFinder?
+    <!-- Footer Links with Blue accent -->
+    <div class="mt-10 pt-8 border-t-2 border-gray-200">
+      <p class="text-center text-base text-gray-600">
+        New to AfriHunt?
         <%= link_to "Create an account", new_registration_path(resource_name),
-              class: "link font-medium ml-1" %>
+              class: "text-blue-600 hover:text-blue-700 font-bold ml-2 transition-colors" %>
       </p>
     </div>
 
-    <!-- Subtle Help Text -->
+    <!-- Help Text with Icon -->
     <div class="mt-8">
-      <div class="text-center bg-gray-50/40 backdrop-blur-sm rounded-2xl py-4 px-6 border border-gray-100/50">
-        <p class="text-xs text-gray-500 leading-relaxed">
-          <span class="inline-flex items-center">
-            <svg class="h-3.5 w-3.5 mr-1.5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clip-rule="evenodd" />
-            </svg>
-            We'll email you a secure link to sign in instantly
-          </span>
+      <div class="text-center bg-gradient-to-br from-gray-50 to-gray-100/50 backdrop-blur-sm rounded-2xl py-5 px-6 border-2 border-gray-200">
+        <p class="text-sm text-gray-600 leading-relaxed flex items-center justify-center">
+          <svg class="h-5 w-5 mr-2 text-teal-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clip-rule="evenodd" />
+          </svg>
+          <span class="font-medium">We'll email you a secure link to sign in instantly</span>
         </p>
       </div>
     </div>

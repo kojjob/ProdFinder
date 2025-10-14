@@ -1,0 +1,18 @@
+<%= turbo_stream.replace "products-container" do %>
+  <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+    <% @products.each_with_index do |product, index| %>
+      <%= render 'products/product', product: product, index: index %>
+    <% end %>
+  </div>
+  <% if @products.next_page %>
+    <div class="flex justify-center mt-12 mb-8">
+      <%= link_to "Load More", 
+          products_path(page: @products.next_page), 
+          class: "px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200",
+          data: { 
+            turbo_method: :get,
+            turbo_frame: "products-container"
+          } %>
+    </div>
+  <% end %>
+<% end %>

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get "community", to: "pages#community", as: :community
   get "pricing", to: "pages#pricing", as: :pricing
   get "maker_guide", to: "pages#maker_guide", as: :maker_guide
+  get "animations_demo", to: "pages#animations_demo", as: :animations_demo
 
   # User resources
   resources :users, only: [ :show, :edit, :update ] do
@@ -31,8 +32,16 @@ Rails.application.routes.draw do
 
   # Product resources
   resources :products, only: [ :index, :show, :new, :create, :edit, :update ] do
-    resources :comments, only: [ :create, :destroy ]
+    resources :comments, only: [ :create, :destroy ] do
+      member do
+        post :toggle_upvote
+      end
+    end
     resources :upvotes, only: [ :create, :destroy ]
+    member do
+      post :toggle_upvote
+      get :quick_view
+    end
   end
 
   # Category resources

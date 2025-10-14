@@ -1,0 +1,43 @@
+<%
+  @magic_link = magic_link_url(@resource, @scope_name => {email: @resource.email, token: @token, remember_me: @remember_me})
+%>
+Your magic link is ready
+========================
+
+Hi there,
+
+Click the link below to sign in to your ProdFinder account:
+
+<%= @magic_link %>
+
+
+IMPORTANT: This link expires in <%= Devise.passwordless_login_within.inspect %> and can only be used once for your security.
+
+
+HOW TO USE YOUR MAGIC LINK
+---------------------------
+
+1. Click the link above (or copy and paste it into your browser)
+2. You'll be signed in automatically
+3. You'll be redirected to your dashboard
+
+
+DIDN'T REQUEST THIS EMAIL?
+---------------------------
+
+If you didn't request this magic link, you can safely ignore this email.
+Someone may have entered your email address by mistake.
+
+
+SECURITY NOTE
+-------------
+
+ProdFinder will never ask you for your password via email. This link
+provides secure, passwordless access to your account.
+
+
+--
+This email was sent by ProdFinder
+<%= root_url %>
+
+For support, visit our help center or contact us directly.

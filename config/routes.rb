@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    sessions: "devise/passwordless/sessions",
+    sessions: "users/sessions",
     registrations: "users/registrations",
     confirmations: "users/confirmations"
   }

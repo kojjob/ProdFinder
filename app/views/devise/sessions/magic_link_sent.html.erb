@@ -1,69 +1,69 @@
-<% content_for :title, "Check Your Inbox - ProdFinder" %>
+<% content_for :title, "Check Your Inbox - AfriHunt" %>
 
 <div class="auth-container">
-  <div class="auth-form ">
-    <!-- Success Icon with Checkmark Animation -->
+  <div class="auth-form">
+    <!-- Success Icon with Teal Gradient -->
     <div class="text-center mb-12">
-      <div class="inline-flex items-center justify-center w-20 h-20 mb-8 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full shadow-md ">
-        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="inline-flex items-center justify-center w-24 h-24 mb-8 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full shadow-lg">
+        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
         </svg>
       </div>
 
-      <h1 class="text-3xl font-semibold text-gray-900 mb-4 tracking-tight">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
         Check your inbox
       </h1>
-      <p class="text-base text-gray-600 leading-relaxed max-w-md mx-auto">
+      <p class="text-lg text-gray-700 leading-relaxed max-w-md mx-auto">
         We've sent a magic link to
-        <span class="font-medium text-gray-900 block mt-1">
+        <span class="font-bold text-teal-700 block mt-2 text-xl">
           <%= params[:email] || session[:magic_link_email] || 'your email' %>
         </span>
       </p>
     </div>
 
-    <!-- Instructions Card -->
-    <div class="bg-gradient-to-br from-blue-50/80 to-blue-100/60 backdrop-blur-sm rounded-3xl p-8 mb-8 border border-blue-200/50 shadow-sm">
-      <div class="space-y-4">
-        <!-- Step 1 -->
+    <!-- Instructions Card with Red-Blue-Teal accents -->
+    <div class="bg-gradient-to-br from-red-50/30 via-blue-50/30 to-teal-50/30 backdrop-blur-sm rounded-3xl p-8 mb-8 border-2 border-gray-200 shadow-lg">
+      <div class="space-y-5">
+        <!-- Step 1 with Red accent -->
         <div class="flex items-start space-x-4 group">
-          <div class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold shadow-sm">
+          <div class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-red-600 to-red-700 text-white rounded-full flex items-center justify-center text-base font-bold shadow-md">
             1
           </div>
-          <div class="flex-1 pt-0.5">
-            <p class="text-sm font-medium text-gray-900 mb-1">
+          <div class="flex-1 pt-1">
+            <p class="text-base font-bold text-gray-900 mb-1">
               Open your email
             </p>
-            <p class="text-xs text-gray-600 leading-relaxed">
-              Check your inbox for an email from ProdFinder
+            <p class="text-sm text-gray-700 leading-relaxed">
+              Check your inbox for an email from AfriHunt
             </p>
           </div>
         </div>
 
-        <!-- Step 2 -->
+        <!-- Step 2 with Blue accent -->
         <div class="flex items-start space-x-4 group">
-          <div class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold shadow-sm">
+          <div class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-full flex items-center justify-center text-base font-bold shadow-md">
             2
           </div>
-          <div class="flex-1 pt-0.5">
-            <p class="text-sm font-medium text-gray-900 mb-1">
+          <div class="flex-1 pt-1">
+            <p class="text-base font-bold text-gray-900 mb-1">
               Click the magic link
             </p>
-            <p class="text-xs text-gray-600 leading-relaxed">
+            <p class="text-sm text-gray-700 leading-relaxed">
               One click and you'll be signed in automatically
             </p>
           </div>
         </div>
 
-        <!-- Step 3 -->
+        <!-- Step 3 with Teal accent -->
         <div class="flex items-start space-x-4 group">
-          <div class="flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-semibold shadow-sm">
+          <div class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-teal-600 to-teal-700 text-white rounded-full flex items-center justify-center text-base font-bold shadow-md">
             3
           </div>
-          <div class="flex-1 pt-0.5">
-            <p class="text-sm font-medium text-gray-900 mb-1">
+          <div class="flex-1 pt-1">
+            <p class="text-base font-bold text-gray-900 mb-1">
               Start exploring
             </p>
-            <p class="text-xs text-gray-600 leading-relaxed">
+            <p class="text-sm text-gray-700 leading-relaxed">
               You'll be redirected to your dashboard
             </p>
           </div>
@@ -71,90 +71,90 @@
       </div>
     </div>
 
-    <!-- Info Notice -->
-    <div class="bg-gray-50/50 backdrop-blur-sm rounded-2xl py-4 px-6 border border-gray-100/50 mb-8">
+    <!-- Info Notice with Teal accent -->
+    <div class="bg-gradient-to-br from-teal-50/50 to-teal-100/30 backdrop-blur-sm rounded-2xl py-5 px-6 border-2 border-teal-200/50 mb-8">
       <div class="flex items-start space-x-3">
-        <svg class="h-5 w-5 text-gray-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+        <svg class="h-6 w-6 text-teal-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clip-rule="evenodd" />
         </svg>
         <div class="flex-1">
-          <p class="text-xs text-gray-600 leading-relaxed">
-            The magic link will expire in <span class="font-medium text-gray-900">20 minutes</span> for security reasons.
+          <p class="text-sm text-gray-700 leading-relaxed font-medium">
+            The magic link will expire in <span class="font-bold text-teal-700">20 minutes</span> for security reasons.
           </p>
         </div>
       </div>
     </div>
 
-    <!-- Troubleshooting Section -->
-    <div class="text-center space-y-4">
-      <p class="text-sm text-gray-600">
+    <!-- Troubleshooting Section with enhanced buttons -->
+    <div class="text-center space-y-5">
+      <p class="text-base text-gray-700 font-medium">
         Didn't receive the email?
       </p>
 
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <%= button_to "Resend magic link",
               user_password_path,
               method: :post,
               params: { user: { email: params[:email] || session[:magic_link_email] } },
-              class: "btn btn-secondary px-6 py-2.5 text-sm font-medium",
+              class: "px-8 py-3 text-base font-bold text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200",
               data: { turbo: false } %>
 
         <%= link_to "Back to sign in",
               new_session_path(resource_name),
-              class: "text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors" %>
+              class: "text-base text-gray-600 hover:text-gray-900 font-bold transition-colors" %>
       </div>
     </div>
 
-    <!-- Help Tips -->
-    <div class="mt-10 pt-8 border-t border-gray-200/60">
+    <!-- Help Tips with enhanced styling -->
+    <div class="mt-10 pt-8 border-t-2 border-gray-200">
       <details class="group">
-        <summary class="flex items-center justify-center cursor-pointer text-sm text-gray-600 hover:text-gray-900 transition-colors">
-          <span class="font-medium">Having trouble?</span>
-          <svg class="ml-2 h-4 w-4 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <summary class="flex items-center justify-center cursor-pointer text-base text-gray-700 hover:text-gray-900 transition-colors">
+          <span class="font-bold">Having trouble?</span>
+          <svg class="ml-2 h-5 w-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
           </svg>
         </summary>
 
-        <div class="mt-6 space-y-4 ">
-          <div class="bg-gray-50/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-100/50">
-            <h3 class="text-sm font-semibold text-gray-900 mb-3">
+        <div class="mt-6 space-y-5">
+          <div class="bg-gradient-to-br from-gray-50 to-gray-100/50 backdrop-blur-sm rounded-2xl p-6 border-2 border-gray-200">
+            <h3 class="text-base font-bold text-gray-900 mb-4">
               Common solutions
             </h3>
-            <ul class="space-y-3 text-xs text-gray-600">
-              <li class="flex items-start space-x-2">
-                <svg class="h-4 w-4 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <ul class="space-y-3 text-sm text-gray-700">
+              <li class="flex items-start space-x-3">
+                <svg class="h-5 w-5 text-teal-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.236 4.53L8.23 10.661a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
                 </svg>
-                <span>Check your spam or junk folder</span>
+                <span class="font-medium">Check your spam or junk folder</span>
               </li>
-              <li class="flex items-start space-x-2">
-                <svg class="h-4 w-4 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <li class="flex items-start space-x-3">
+                <svg class="h-5 w-5 text-teal-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.236 4.53L8.23 10.661a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
                 </svg>
-                <span>Wait a minute or two - sometimes emails take time to arrive</span>
+                <span class="font-medium">Wait a minute or two - sometimes emails take time to arrive</span>
               </li>
-              <li class="flex items-start space-x-2">
-                <svg class="h-4 w-4 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <li class="flex items-start space-x-3">
+                <svg class="h-5 w-5 text-teal-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.236 4.53L8.23 10.661a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
                 </svg>
-                <span>Verify you entered the correct email address</span>
+                <span class="font-medium">Verify you entered the correct email address</span>
               </li>
-              <li class="flex items-start space-x-2">
-                <svg class="h-4 w-4 text-blue-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <li class="flex items-start space-x-3">
+                <svg class="h-5 w-5 text-teal-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.236 4.53L8.23 10.661a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
                 </svg>
-                <span>Add noreply@prodfinder.com to your contacts</span>
+                <span class="font-medium">Add noreply@afrihunt.com to your contacts</span>
               </li>
             </ul>
           </div>
 
           <div class="text-center">
-            <p class="text-xs text-gray-500 mb-3">
+            <p class="text-sm text-gray-600 mb-3 font-medium">
               Still need help?
             </p>
             <%= link_to "Contact support",
                   "#",
-                  class: "text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors" %>
+                  class: "text-base text-blue-600 hover:text-blue-700 font-bold transition-colors" %>
           </div>
         </div>
       </details>

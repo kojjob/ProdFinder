@@ -17,3 +17,25 @@
   0% { transform: translateY(20px); opacity: 0; }
   100% { transform: translateY(0); opacity: 1; }
 }
+
+/* Authentication Page Containers */
+.auth-container {
+  @apply min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-gray-50 via-white to-gray-50;
+}
+
+.auth-form {
+  @apply w-full max-w-md mx-auto;
+  /*
+   * max-w-md = 448px - Perfect for focused auth forms
+   * Responsive breakpoints:
+   * - Mobile (320px+): Full width with 16px padding
+   * - Tablet (640px+): Centered with max-width
+   * - Desktop (1024px+): Centered with max-width
+   */
+}
+
+/* Wider form variant for sign-up with more fields */
+.auth-form-wide {
+  @apply w-full max-w-lg mx-auto;
+  /* max-w-lg = 512px - Slightly wider for multi-field forms */
+}

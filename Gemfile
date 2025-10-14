@@ -25,6 +25,9 @@ gem "jbuilder"
 # Authentication
 gem "devise", "4.9.4"
 
+# Pagination
+gem "kaminari"
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 

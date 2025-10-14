@@ -2,178 +2,154 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800&display=swap');
 
-/* Apple-Inspired Tailwind CSS v4 Configuration */
-@config {
-  /* Apple-inspired Font configuration */
-  fontFamily: {
-    sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Inter', 'system-ui', 'sans-serif'];
-  };
-
+/* Apple-Inspired Tailwind CSS v4 Theme Configuration */
+@theme {
   /* Apple-inspired color palette with refined blues and grays */
-  colors: {
-    primary: {
-      50: '#f0f9ff';
-      100: '#e0f2fe';
-      200: '#bae6fd';
-      300: '#7dd3fc';
-      400: '#38bdf8';
-      500: '#0ea5e9';
-      600: '#0284c7';
-      700: '#0369a1';
-      800: '#075985';
-      900: '#0c4a6e';
-      950: '#082f49';
-    };
-    secondary: {
-      50: '#f9fafb';
-      100: '#f3f4f6';
-      200: '#e5e7eb';
-      300: '#d1d5db';
-      400: '#9ca3af';
-      500: '#6b7280';
-      600: '#4b5563';
-      700: '#374151';
-      800: '#1f2937';
-      900: '#111827';
-      950: '#030712';
-    };
-    success: {
-      50: '#f0fdf4';
-      100: '#dcfce7';
-      200: '#bbf7d0';
-      300: '#86efac';
-      400: '#4ade80';
-      500: '#22c55e';
-      600: '#16a34a';
-      700: '#15803d';
-      800: '#166534';
-      900: '#14532d';
-      950: '#052e16';
-    };
-    error: {
-      50: '#fef2f2';
-      100: '#fee2e2';
-      200: '#fecaca';
-      300: '#fca5a5';
-      400: '#f87171';
-      500: '#ef4444';
-      600: '#dc2626';
-      700: '#b91c1c';
-      800: '#991b1b';
-      900: '#7f1d1d';
-      950: '#450a0a';
-    };
-    warning: {
-      50: '#fffbeb';
-      100: '#fef3c7';
-      200: '#fde68a';
-      300: '#fcd34d';
-      400: '#fbbf24';
-      500: '#f59e0b';
-      600: '#d97706';
-      700: '#b45309';
-      800: '#92400e';
-      900: '#78350f';
-      950: '#451a03';
-    };
-  };
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-200: #bae6fd;
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+  --color-primary-800: #075985;
+  --color-primary-900: #0c4a6e;
+  --color-primary-950: #082f49;
+
+  --color-secondary-50: #f9fafb;
+  --color-secondary-100: #f3f4f6;
+  --color-secondary-200: #e5e7eb;
+  --color-secondary-300: #d1d5db;
+  --color-secondary-400: #9ca3af;
+  --color-secondary-500: #6b7280;
+  --color-secondary-600: #4b5563;
+  --color-secondary-700: #374151;
+  --color-secondary-800: #1f2937;
+  --color-secondary-900: #111827;
+  --color-secondary-950: #030712;
+
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-200: #bbf7d0;
+  --color-success-300: #86efac;
+  --color-success-400: #4ade80;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-700: #15803d;
+  --color-success-800: #166534;
+  --color-success-900: #14532d;
+  --color-success-950: #052e16;
+
+  --color-error-50: #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-200: #fecaca;
+  --color-error-300: #fca5a5;
+  --color-error-400: #f87171;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-700: #b91c1c;
+  --color-error-800: #991b1b;
+  --color-error-900: #7f1d1d;
+  --color-error-950: #450a0a;
+
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-200: #fde68a;
+  --color-warning-300: #fcd34d;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+  --color-warning-800: #92400e;
+  --color-warning-900: #78350f;
+  --color-warning-950: #451a03;
 
   /* Perfect Apple-inspired spacing */
-  spacing: {
-    '18': '4.5rem';
-    '88': '22rem';
-    '128': '32rem';
-    '144': '36rem';
-  };
+  --spacing-18: 4.5rem;
+  --spacing-88: 22rem;
+  --spacing-128: 32rem;
+  --spacing-144: 36rem;
 
   /* Apple-inspired border radius with smoother curves */
-  borderRadius: {
-    '3xl': '1.5rem';
-    '4xl': '2rem';
-    '5xl': '2.5rem';
-  };
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
+  --radius-5xl: 2.5rem;
 
   /* Apple-inspired custom shadows with depth and clarity */
-  boxShadow: {
-    'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.04)';
-    'soft': '0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px -4px rgba(0, 0, 0, 0.06)';
-    'medium': '0 4px 16px rgba(0, 0, 0, 0.06), 0 12px 32px -8px rgba(0, 0, 0, 0.08)';
-    'strong': '0 8px 32px rgba(0, 0, 0, 0.08), 0 16px 48px -8px rgba(0, 0, 0, 0.12)';
-    'premium': '0 20px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.02)';
-    'glow': '0 0 20px rgba(14, 165, 233, 0.12), 0 0 40px rgba(14, 165, 233, 0.08)';
-    'glow-strong': '0 0 30px rgba(14, 165, 233, 0.18), 0 0 60px rgba(14, 165, 233, 0.12)';
-    'inner-soft': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.04)';
-  };
-
-  /* Refined ring widths */
-  ringWidth: {
-    '3': '3px';
-    '6': '6px';
-  };
-
-  ringOffsetWidth: {
-    '1': '1px';
-    '2': '2px';
-  };
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.06), 0 12px 32px -8px rgba(0, 0, 0, 0.08);
+  --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.08), 0 16px 48px -8px rgba(0, 0, 0, 0.12);
+  --shadow-premium: 0 20px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  --shadow-glow: 0 0 20px rgba(14, 165, 233, 0.12), 0 0 40px rgba(14, 165, 233, 0.08);
+  --shadow-glow-strong: 0 0 30px rgba(14, 165, 233, 0.18), 0 0 60px rgba(14, 165, 233, 0.12);
+  --shadow-inner-soft: inset 0 2px 4px 0 rgba(0, 0, 0, 0.04);
 
   /* Apple-inspired smooth animations */
-  animation: {
-    'fade-in': 'fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-    'slide-up': 'slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-    'slide-down': 'slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-    'slide-in-up': 'slideInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-    'fade-in-scale': 'fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-    'scale-in': 'scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
-    'pulse-soft': 'pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite';
-    'float': 'float 6s ease-in-out infinite';
-    'bounce-soft': 'bounceSoft 2s ease-in-out infinite';
-    'shimmer': 'shimmer 2s ease-in-out infinite';
-    'spin-slow': 'spin 3s linear infinite';
-  };
+  --animate-fade-in: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-up: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-down: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-in-up: slideInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-fade-in-scale: fadeInScale 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-scale-in: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-pulse-soft: pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-bounce-soft: bounceSoft 2s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s ease-in-out infinite;
+  --animate-spin-slow: spin 3s linear infinite;
+}
 
-  keyframes: {
-    fadeIn: {
-      '0%': { opacity: '0' };
-      '100%': { opacity: '1' };
-    };
-    slideUp: {
-      '0%': { transform: 'translateY(8px)'; opacity: '0' };
-      '100%': { transform: 'translateY(0)'; opacity: '1' };
-    };
-    slideDown: {
-      '0%': { transform: 'translateY(-8px)'; opacity: '0' };
-      '100%': { transform: 'translateY(0)'; opacity: '1' };
-    };
-    slideInUp: {
-      '0%': { transform: 'translateY(20px)'; opacity: '0' };
-      '100%': { transform: 'translateY(0)'; opacity: '1' };
-    };
-    fadeInScale: {
-      '0%': { transform: 'scale(0.96)'; opacity: '0' };
-      '100%': { transform: 'scale(1)'; opacity: '1' };
-    };
-    scaleIn: {
-      '0%': { transform: 'scale(0.9)'; opacity: '0' };
-      '100%': { transform: 'scale(1)'; opacity: '1' };
-    };
-    pulseSoft: {
-      '0%, 100%': { opacity: '1' };
-      '50%': { opacity: '0.85' };
-    };
-    float: {
-      '0%, 100%': { transform: 'translateY(0) rotate(0deg)' };
-      '33%': { transform: 'translateY(-8px) rotate(1deg)' };
-      '66%': { transform: 'translateY(4px) rotate(-1deg)' };
-    };
-    bounceSoft: {
-      '0%, 100%': { transform: 'translateY(0)' };
-      '50%': { transform: 'translateY(-5px)' };
-    };
-    shimmer: {
-      '0%': { backgroundPosition: '-200% 0' };
-      '100%': { backgroundPosition: '200% 0' };
-    };
-  };
+/* Animation keyframes */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+  0% { transform: translateY(8px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideDown {
+  0% { transform: translateY(-8px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInUp {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInScale {
+  0% { transform: scale(0.96); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(1deg); }
+  66% { transform: translateY(4px) rotate(-1deg); }
+}
+
+@keyframes bounceSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 /* Apple-inspired authentication page layout with refined gradients */
@@ -441,8 +417,14 @@
     @apply p-4;
   }
 
-  .auth-form, .auth-form-wide {
-    @apply p-6 mx-3 rounded-2xl max-w-none;
+  .auth-form {
+    @apply p-6 rounded-2xl;
+    /* Maintain max-w-md constraint on mobile for consistent centered look */
+  }
+
+  .auth-form-wide {
+    @apply p-6 rounded-2xl;
+    /* Maintain max-w-xl constraint on mobile */
   }
 
   .auth-title {
@@ -468,7 +450,8 @@
 
 @media (max-width: 480px) {
   .auth-form, .auth-form-wide {
-    @apply p-5 mx-2;
+    @apply p-5;
+    /* Maintain width constraints even on very small screens */
   }
 
   .auth-title {

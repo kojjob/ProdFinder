@@ -19,15 +19,22 @@
     <%= javascript_importmap_tags %>
   </head>
   <body class="bg-secondary-50">
+    <!-- Navigation -->
+    <% unless controller_name == 'sessions' || controller_name == 'registrations' || controller_name == 'confirmations' %>
+      <%= render "shared/navbar" %>
+    <% end %>
     <!-- Flash Messages for non-auth pages -->
     <% unless controller_name == 'sessions' || controller_name == 'registrations' || controller_name == 'confirmations' %>
-      <div class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
+      <div class="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
         <%= render "shared/flash_messages" %>
       </div>
     <% end %>
-
-    <main class="<%= controller_name == 'sessions' || controller_name == 'registrations' || controller_name == 'confirmations' ? '' : 'container mx-auto mt-28 px-5 flex' %>">
+    <main class="<%= controller_name == 'sessions' || controller_name == 'registrations' || controller_name == 'confirmations' ? '' : 'min-h-screen' %>">
       <%= yield %>
     </main>
+    <!-- Footer -->
+    <% unless controller_name == 'sessions' || controller_name == 'registrations' || controller_name == 'confirmations' %>
+      <%= render "shared/footer" %>
+    <% end %>
   </body>
 </html>

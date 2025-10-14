@@ -1,0 +1,198 @@
+<% content_for :title, "Sign Up - ProdFinder" %>
+
+<div class="auth-container">
+  <div class="auth-form-wide">
+    <!-- Header -->
+    <div class="auth-header">
+      <div class="flex justify-center mb-6">
+        <!-- Logo placeholder - replace with your actual logo -->
+        <div class="w-12 h-12 bg-primary-600 rounded-xl flex items-center justify-center">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+      </div>
+      <h1 class="auth-title">Create your account</h1>
+      <p class="auth-subtitle">Join ProdFinder and discover amazing products</p>
+    </div>
+
+    <!-- Flash Messages -->
+    <%= render "shared/flash_messages" %>
+
+    <!-- Error Messages -->
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <!-- Sign Up Form -->
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name),
+                  html: {
+                    class: "space-y-6",
+                    data: {
+                      controller: "signup-form",
+                      turbo_frame: "auth_form"
+                    }
+                  }) do |f| %>
+
+      <!-- Email Field -->
+      <div class="form-field">
+        <%= f.label :email, "Email address", class: "form-label" %>
+        <div class="relative">
+          <%= f.email_field :email,
+                autofocus: true,
+                autocomplete: "email",
+                required: true,
+                placeholder: "Enter your email address",
+                class: "form-input",
+                data: {
+                  action: "input->signup-form#validateEmail blur->signup-form#validateEmail",
+                  signup_form_target: "emailInput"
+                } %>
+          <!-- Email validation icon -->
+          <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-success-400 hidden" data-signup-form-target="emailValidIcon" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.236 4.53L8.23 10.661a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+        <!-- Email validation message -->
+        <div class="field-error hidden" data-signup-form-target="emailError">
+          <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
+          <span data-signup-form-target="emailErrorText"></span>
+        </div>
+        <div class="field-success hidden" data-signup-form-target="emailSuccess">
+          <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.236 4.53L8.23 10.661a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+          </svg>
+          Valid email address
+        </div>
+      </div>
+
+      <!-- Username Field -->
+      <div class="form-field">
+        <%= f.label :username, "Username", class: "form-label" %>
+        <div class="relative">
+          <%= f.text_field :username,
+                autocomplete: "username",
+                required: true,
+                placeholder: "Choose a unique username",
+                class: "form-input",
+                data: {
+                  action: "input->signup-form#validateUsername blur->signup-form#validateUsername",
+                  signup_form_target: "usernameInput"
+                } %>
+          <!-- Username validation icon -->
+          <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-success-400 hidden" data-signup-form-target="usernameValidIcon" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.236 4.53L8.23 10.661a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+        <!-- Username validation message -->
+        <div class="field-error hidden" data-signup-form-target="usernameError">
+          <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
+          <span data-signup-form-target="usernameErrorText"></span>
+        </div>
+        <div class="field-success hidden" data-signup-form-target="usernameSuccess">
+          <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.236 4.53L8.23 10.661a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+          </svg>
+          Username is available
+        </div>
+        <p class="text-xs text-secondary-500 mt-1">
+          3-30 characters, letters, numbers, and underscores only
+        </p>
+      </div>
+
+      <!-- Full Name Field -->
+      <div class="form-field">
+        <%= f.label :full_name, "Full name", class: "form-label" %>
+        <div class="relative">
+          <%= f.text_field :full_name,
+                autocomplete: "name",
+                required: true,
+                placeholder: "Enter your full name",
+                class: "form-input",
+                data: {
+                  action: "input->signup-form#validateName blur->signup-form#validateName",
+                  signup_form_target: "nameInput"
+                } %>
+          <!-- Name validation icon -->
+          <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+            <svg class="h-5 w-5 text-success-400 hidden" data-signup-form-target="nameValidIcon" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.236 4.53L8.23 10.661a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+        <!-- Name validation message -->
+        <div class="field-error hidden" data-signup-form-target="nameError">
+          <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
+          <span data-signup-form-target="nameErrorText"></span>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="space-y-4">
+        <%= f.submit "Create Account",
+              class: "btn btn-primary w-full",
+              data: {
+                signup_form_target: "submitButton",
+                action: "click->signup-form#handleSubmit"
+              } %>
+
+        <!-- Loading state -->
+        <div class="hidden text-center" data-signup-form-target="loadingMessage">
+          <div class="inline-flex items-center text-sm text-secondary-600">
+            <svg class="animate-spin -ml-1 mr-3 h-4 w-4 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Creating your account...
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Divider -->
+    <div class="mt-8 pt-6 border-t border-secondary-200">
+      <div class="text-center">
+        <p class="text-sm text-secondary-600">
+          Already have an account?
+          <%= link_to "Sign in", new_session_path(resource_name),
+                class: "link ml-1" %>
+        </p>
+      </div>
+    </div>
+
+    <!-- Terms and Privacy -->
+    <div class="mt-6 text-center">
+      <p class="text-xs text-secondary-500">
+        By creating an account, you agree to our
+        <a href="#" class="link text-xs">Terms of Service</a>
+        and
+        <a href="#" class="link text-xs">Privacy Policy</a>
+      </p>
+    </div>
+
+    <!-- Help Text -->
+    <div class="mt-6">
+      <div class="bg-primary-50 rounded-lg p-4">
+        <div class="flex items-start">
+          <svg class="h-5 w-5 text-primary-400 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+          </svg>
+          <div class="text-left">
+            <p class="text-sm text-primary-800 font-medium mb-1">What happens next?</p>
+            <p class="text-xs text-primary-700">
+              We'll send a confirmation email to verify your account. No password needed - we use secure magic links for sign-in!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

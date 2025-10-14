@@ -1,1 +1,148 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Custom CSS Components for Authentication Pages */
+
+/* Base form styling */
+.auth-form {
+  @apply bg-white rounded-2xl shadow-lg border border-secondary-100 p-8 w-full max-w-md mx-auto;
+}
+
+.auth-form-wide {
+  @apply bg-white rounded-2xl shadow-lg border border-secondary-100 p-8 w-full max-w-lg mx-auto;
+}
+
+/* Form field styling */
+.form-field {
+  @apply space-y-2;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-secondary-700 mb-2;
+}
+
+.form-input {
+  @apply w-full px-4 py-3 border border-secondary-300 rounded-lg text-secondary-900 placeholder-secondary-400
+         focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200
+         disabled:bg-secondary-50 disabled:text-secondary-500 disabled:cursor-not-allowed;
+}
+
+.form-input-error {
+  @apply border-error-300 focus:ring-error-500 focus:border-error-500;
+}
+
+.form-input-success {
+  @apply border-success-300 focus:ring-success-500 focus:border-success-500;
+}
+
+/* Button styling */
+.btn {
+  @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg
+         focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-primary {
+  @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 shadow-sm hover:shadow-md;
+}
+
+.btn-secondary {
+  @apply bg-secondary-100 text-secondary-700 hover:bg-secondary-200 focus:ring-secondary-500 border-secondary-300;
+}
+
+.btn-outline {
+  @apply bg-transparent text-primary-600 border-primary-300 hover:bg-primary-50 focus:ring-primary-500;
+}
+
+.btn-loading {
+  @apply relative text-transparent;
+}
+
+.btn-loading::after {
+  content: '';
+  @apply absolute inset-0 flex items-center justify-center;
+  background-image: url("data:image/svg+xml,%3csvg class='animate-spin' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'%3e%3ccircle class='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' stroke-width='4'%3e%3c/circle%3e%3cpath class='opacity-75' fill='currentColor' d='m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'%3e%3c/path%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1.25rem;
+}
+
+/* Error and success message styling */
+.alert {
+  @apply p-4 rounded-lg border text-sm font-medium;
+}
+
+.alert-error {
+  @apply bg-error-50 border-error-200 text-error-800;
+}
+
+.alert-success {
+  @apply bg-success-50 border-success-200 text-success-800;
+}
+
+.alert-warning {
+  @apply bg-warning-50 border-warning-200 text-warning-800;
+}
+
+.alert-info {
+  @apply bg-primary-50 border-primary-200 text-primary-800;
+}
+
+/* Field error styling */
+.field-error {
+  @apply text-error-600 text-sm mt-1 flex items-center;
+}
+
+.field-success {
+  @apply text-success-600 text-sm mt-1 flex items-center;
+}
+
+/* Link styling */
+.link {
+  @apply text-primary-600 hover:text-primary-700 font-medium transition-colors duration-200;
+}
+
+.link-secondary {
+  @apply text-secondary-600 hover:text-secondary-700 transition-colors duration-200;
+}
+
+/* Checkbox styling */
+.checkbox {
+  @apply h-4 w-4 text-primary-600 focus:ring-primary-500 border-secondary-300 rounded;
+}
+
+/* Loading spinner */
+.spinner {
+  @apply animate-spin h-5 w-5 text-current;
+}
+
+/* Auth page layout */
+.auth-container {
+  @apply min-h-screen bg-gradient-to-br from-secondary-50 to-primary-50 flex items-center justify-center p-4;
+}
+
+.auth-header {
+  @apply text-center mb-8;
+}
+
+.auth-title {
+  @apply text-3xl font-bold text-secondary-900 mb-2;
+}
+
+.auth-subtitle {
+  @apply text-secondary-600 text-lg;
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .auth-form, .auth-form-wide {
+    @apply p-6 mx-4;
+  }
+
+  .auth-title {
+    @apply text-2xl;
+  }
+
+  .auth-subtitle {
+    @apply text-base;
+  }
+}

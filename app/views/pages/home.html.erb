@@ -1,27 +1,623 @@
-<div class="min-h-screen bg-gray-50">
-  <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-    <div class="text-center">
-      <h1 class="text-4xl font-bold text-gray-900 mb-4">
-        Welcome to ProdFinder
-      </h1>
-      <p class="text-xl text-gray-600 mb-8">
-        Discover innovative African products and launch your own
-      </p>
-      <div class="space-x-4">
-        <% if user_signed_in? %>
-          <span class="text-lg text-gray-700">
-            Welcome back, <%= current_user.full_name %>!
-          </span>
-          <%= link_to "Sign Out", destroy_user_session_path, 
-              data: { turbo_method: :delete }, 
-              class: "bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
-        <% else %>
-          <%= link_to "Sign In", new_user_session_path, 
-              class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-          <%= link_to "Sign Up", new_user_registration_path, 
-              class: "bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" %>
-        <% end %>
+<% content_for :title, "AfriHunt - Discover & Launch African Tech Products" %>
+<% content_for :meta_description, "AfriHunt is the premier platform for discovering innovative African tech products and connecting with makers across the continent. Launch your product, join the community, and shape the future of African tech." %>
+
+<style>
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slide-in-left {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes slide-in-right {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+  .animate-slide-up { animation: slide-up 0.8s ease-out forwards; }
+  .animate-slide-in-left { animation: slide-in-left 0.8s ease-out forwards; }
+  .animate-slide-in-right { animation: slide-in-right 0.8s ease-out forwards; }
+  .animate-scale-in { animation: scale-in 0.6s ease-out forwards; }
+
+  .gradient-animate {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #dc2626, #2563eb, #14b8a6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+</style>
+
+<!-- Hero Section -->
+<section class="relative overflow-hidden bg-gradient-to-br from-red-600 via-blue-600 to-teal-500 min-h-screen flex items-center">
+  <!-- Animated Background Patterns -->
+  <div class="absolute inset-0 opacity-10">
+    <svg class="absolute top-20 right-20 w-64 h-64 text-white animate-float" style="animation-delay: 0s;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="currentColor" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,90,-16.3,88.5,-0.9C87,14.6,81.4,29.2,73.1,42.8C64.8,56.4,53.8,69,40.3,76.8C26.8,84.6,11.1,87.6,-4.8,85.9C-20.7,84.2,-41.4,77.8,-56.6,67.1C-71.8,56.4,-81.5,41.4,-85.6,25.1C-89.7,8.8,-88.2,-8.8,-82.3,-24.7C-76.4,-40.6,-66.1,-54.8,-53.1,-62.3C-40.1,-69.8,-24.4,-70.6,-9.3,-73.9C5.8,-77.2,30.6,-83.6,44.7,-76.4Z" transform="translate(100 100)" />
+    </svg>
+    <svg class="absolute bottom-20 left-20 w-72 h-72 text-white animate-float" style="animation-delay: 2s;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="currentColor" d="M39.5,-65.5C51.4,-58.3,61.3,-47.6,68.4,-35.2C75.5,-22.8,79.8,-8.7,79.3,5.3C78.8,19.3,73.5,33.2,65.1,45.3C56.7,57.4,45.2,67.7,32.1,73.4C19,79.1,4.3,80.2,-10.3,77.8C-24.9,75.4,-39.4,69.5,-51.8,60.3C-64.2,51.1,-74.5,38.6,-78.9,24.5C-83.3,10.4,-81.8,-5.3,-76.2,-19.4C-70.6,-33.5,-60.9,-46,-48.8,-53.6C-36.7,-61.2,-22.2,-63.9,-8.3,-66.8C5.6,-69.7,27.6,-72.7,39.5,-65.5Z" transform="translate(100 100)" />
+    </svg>
+    <svg class="absolute top-1/2 left-1/2 w-56 h-56 text-white animate-float" style="animation-delay: 4s;" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="currentColor" d="M47.3,-81.7C59.9,-72.8,67.5,-56.4,73.7,-40.5C79.9,-24.6,84.7,-9.2,84.2,6.1C83.7,21.4,77.9,36.6,69.4,49.8C60.9,63,49.7,74.2,36.2,79.8C22.7,85.4,6.9,85.4,-9.1,83.9C-25.1,82.4,-41.3,79.4,-54.8,71.8C-68.3,64.2,-79.1,52,-84.6,37.9C-90.1,23.8,-90.3,7.8,-86.8,-6.9C-83.3,-21.6,-76.1,-35,-66.3,-46.8C-56.5,-58.6,-44.1,-68.8,-30.4,-77.3C-16.7,-85.8,-1.7,-92.6,12.8,-90.4C27.3,-88.2,34.7,-90.6,47.3,-81.7Z" transform="translate(100 100)" />
+    </svg>
+  </div>
+
+  <!-- Gradient Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/20"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Left Column: Content -->
+      <div class="text-white animate-slide-in-left">
+        <div class="inline-flex items-center px-4 py-2 rounded-full glass-effect mb-6">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+          </svg>
+          <span class="text-sm font-semibold tracking-wide">#1 Platform for African Tech Products</span>
+        </div>
+
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight" style="letter-spacing: -0.02em;">
+          Discover & Launch<br/>
+          <span class="text-teal-100">African Tech</span><br/>
+          Products
+        </h1>
+
+        <p class="text-xl md:text-2xl text-red-50 mb-8 leading-relaxed max-w-2xl" style="font-weight: 300;">
+          Join the fastest-growing community of African makers, discover innovative products, and shape the future of tech across the continent.
+        </p>
+
+
+        <div class="flex flex-col sm:flex-row gap-4 mb-12">
+          <%= link_to new_user_registration_path, class: "group inline-flex items-center justify-center px-8 py-4 border-2 border-white rounded-xl text-lg font-bold text-red-600 bg-white hover:bg-red-50 transition-all duration-300 transform hover:-translate-y-1 shadow-2xl hover:shadow-3xl" do %>
+            <svg class="w-6 h-6 mr-2 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Get Started Free
+          <% end %>
+
+          <%= link_to products_path, class: "inline-flex items-center justify-center px-8 py-4 border-2 border-white/30 rounded-xl text-lg font-bold text-white glass-effect hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1 shadow-xl" do %>
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            Explore Products
+          <% end %>
+        </div>
+
+        <!-- Trust Indicators -->
+        <div class="flex flex-wrap items-center gap-8 text-sm">
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span class="text-red-50">Free to join</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-teal-300" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span class="text-red-50">No credit card required</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-teal-300" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span class="text-red-50">Launch in minutes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Hero Visual -->
+      <div class="relative animate-slide-in-right" style="animation-delay: 0.2s;">
+        <div class="relative">
+          <!-- Decorative Elements -->
+          <div class="absolute -top-4 -left-4 w-72 h-72 bg-red-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse-glow"></div>
+          <div class="absolute -bottom-8 -right-4 w-72 h-72 bg-teal-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse-glow" style="animation-delay: 1s;"></div>
+
+          <!-- Main Visual Card -->
+          <div class="relative bg-white rounded-3xl shadow-2xl p-8 transform rotate-2 hover:rotate-0 transition-transform duration-500">
+            <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-xl transform rotate-12 hover:rotate-0 transition-transform duration-300">
+              <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+
+            <div class="space-y-6">
+              <div class="flex items-center gap-4">
+                <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-xl font-extrabold text-gray-900">Launch Your Product</h3>
+                  <p class="text-gray-600">Join <%= number_with_delimiter(@total_makers) %>+ makers</p>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-4">
+                <div class="text-center p-4 bg-gradient-to-br from-red-50 to-orange-50 rounded-xl">
+                  <p class="text-3xl font-extrabold text-red-600"><%= number_with_delimiter(@total_products) %>+</p>
+                  <p class="text-xs font-semibold text-gray-600 mt-1">Products</p>
+                </div>
+                <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl">
+                  <p class="text-3xl font-extrabold text-red-600"><%= @countries_count %>+</p>
+                  <p class="text-xs font-semibold text-gray-600 mt-1">Countries</p>
+                </div>
+                <div class="text-center p-4 bg-gradient-to-br from-teal-50 to-emerald-50 rounded-xl">
+                  <p class="text-3xl font-extrabold text-teal-600"><%= number_with_delimiter(@total_upvotes) %>+</p>
+                  <p class="text-xs font-semibold text-gray-600 mt-1">Upvotes</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 p-4 bg-green-50 border-2 border-green-200 rounded-xl">
+                <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <p class="text-sm font-bold text-green-900">Trusted by makers across Africa</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- Social Proof Stats Bar -->
+<section class="bg-white border-y border-gray-200 py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="animate-scale-in" style="animation-delay: 0.1s;">
+        <p class="text-4xl font-extrabold text-gradient"><%= number_with_delimiter(@total_products) %>+</p>
+        <p class="text-sm font-semibold text-gray-600 mt-2 uppercase tracking-wide">Products Launched</p>
+      </div>
+      <div class="animate-scale-in" style="animation-delay: 0.2s;">
+        <p class="text-4xl font-extrabold text-gradient"><%= number_with_delimiter(@total_makers) %>+</p>
+        <p class="text-sm font-semibold text-gray-600 mt-2 uppercase tracking-wide">Active Makers</p>
+      </div>
+      <div class="animate-scale-in" style="animation-delay: 0.3s;">
+        <p class="text-4xl font-extrabold text-gradient"><%= @countries_count %>+</p>
+        <p class="text-sm font-semibold text-gray-600 mt-2 uppercase tracking-wide">African Countries</p>
+      </div>
+      <div class="animate-scale-in" style="animation-delay: 0.4s;">
+        <p class="text-4xl font-extrabold text-gradient"><%= number_with_delimiter(@total_upvotes) %>+</p>
+        <p class="text-sm font-semibold text-gray-600 mt-2 uppercase tracking-wide">Community Upvotes</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Value Propositions Section -->
+<section class="py-20 bg-gradient-to-br from-gray-50 to-red-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 animate-slide-up">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4" style="letter-spacing: -0.02em;">
+        Why African Makers Choose <span class="text-gradient">AfriHunt</span>
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        The premier platform designed specifically for African tech innovators to launch, grow, and connect.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Value Prop 1 -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 hover-lift animate-slide-up" style="animation-delay: 0.1s;">
+        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-extrabold text-gray-900 mb-3">Launch in Minutes</h3>
+        <p class="text-gray-600 leading-relaxed">
+          Simple, intuitive product submission. No complex forms or waiting periods. Get your product live and start getting feedback instantly.
+        </p>
+      </div>
+
+      <!-- Value Prop 2 -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 hover-lift animate-slide-up" style="animation-delay: 0.2s;">
+        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-extrabold text-gray-900 mb-3">Engaged Community</h3>
+        <p class="text-gray-600 leading-relaxed">
+          Connect with <%= number_with_delimiter(@total_makers) %>+ passionate makers and early adopters across <%= @countries_count %>+ African countries who support innovation.
+        </p>
+      </div>
+
+      <!-- Value Prop 3 -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 hover-lift animate-slide-up" style="animation-delay: 0.3s;">
+        <div class="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-extrabold text-gray-900 mb-3">Instant Validation</h3>
+        <p class="text-gray-600 leading-relaxed">
+          Get real feedback from your target audience. Upvotes, comments, and insights help you validate and improve your product.
+        </p>
+      </div>
+
+      <!-- Value Prop 4 -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 hover-lift animate-slide-up" style="animation-delay: 0.4s;">
+        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-6 shadow-lg">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-extrabold text-gray-900 mb-3">Grow Your Reach</h3>
+        <p class="text-gray-600 leading-relaxed">
+          Gain visibility across the continent. Featured products get thousands of views from potential users, investors, and partners.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 animate-slide-up">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4" style="letter-spacing: -0.02em;">
+        Everything You Need to <span class="text-gradient">Succeed</span>
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Powerful features designed to help African makers launch, grow, and scale their products.
+      </p>
+    </div>
+
+    <div class="space-y-24">
+      <!-- Feature 1: Product Launches -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="animate-slide-in-left">
+          <div class="inline-flex items-center px-4 py-2 rounded-full bg-red-100 text-red-700 font-semibold text-sm mb-4">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+            </svg>
+            Product Launches
+          </div>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6" style="letter-spacing: -0.01em;">
+            Launch Your Product to Thousands
+          </h3>
+          <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+            Share your product with an engaged community of early adopters, tech enthusiasts, and potential customers across Africa. Get instant visibility and valuable feedback.
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <p class="font-bold text-gray-900">Rich Product Pages</p>
+                <p class="text-gray-600">Showcase your product with images, videos, and detailed descriptions</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <p class="font-bold text-gray-900">Topic Tags</p>
+                <p class="text-gray-600">Categorize your product for better discoverability</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <p class="font-bold text-gray-900">Analytics Dashboard</p>
+                <p class="text-gray-600">Track views, upvotes, and engagement metrics</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="relative animate-slide-in-right">
+          <div class="absolute -top-4 -left-4 w-72 h-72 bg-red-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse-glow"></div>
+          <div class="relative bg-gradient-to-br from-red-50 to-orange-50 rounded-3xl p-8 shadow-2xl">
+            <div class="bg-white rounded-2xl p-6 shadow-lg">
+              <div class="flex items-center gap-4 mb-6">
+                <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-teal-600 rounded-xl flex items-center justify-center">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                  </svg>
+                </div>
+                <div class="flex-1">
+                  <h4 class="font-extrabold text-gray-900 text-lg">Your Amazing Product</h4>
+                  <p class="text-sm text-gray-600">Solving real problems for Africans</p>
+                </div>
+                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">LIVE</span>
+              </div>
+              <div class="grid grid-cols-3 gap-4 mb-4">
+                <div class="text-center p-3 bg-red-50 rounded-lg">
+                  <p class="text-2xl font-extrabold text-red-600">1.2K</p>
+                  <p class="text-xs text-gray-600 font-semibold">Views</p>
+                </div>
+                <div class="text-center p-3 bg-blue-50 rounded-lg">
+                  <p class="text-2xl font-extrabold text-blue-600">234</p>
+                  <p class="text-xs text-gray-600 font-semibold">Upvotes</p>
+                </div>
+                <div class="text-center p-3 bg-teal-50 rounded-lg">
+                  <p class="text-2xl font-extrabold text-teal-600">56</p>
+                  <p class="text-xs text-gray-600 font-semibold">Comments</p>
+                </div>
+              </div>
+              <div class="flex gap-2">
+                <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold">SaaS</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">AI</span>
+                <span class="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-xs font-semibold">Mobile</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Feature 2: Community & Discovery -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="relative animate-slide-in-left lg:order-2">
+          <div class="absolute -top-4 -right-4 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-pulse-glow"></div>
+          <div class="relative bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 shadow-2xl">
+            <div class="space-y-4">
+              <div class="bg-white rounded-xl p-4 shadow-md flex items-center gap-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
+                  <span class="text-white font-bold text-lg">JD</span>
+                </div>
+                <div class="flex-1">
+                  <p class="font-bold text-gray-900">John Doe</p>
+                  <p class="text-sm text-gray-600">Started following you</p>
+                </div>
+                <span class="text-xs text-gray-500">2m ago</span>
+              </div>
+              <div class="bg-white rounded-xl p-4 shadow-md">
+                <div class="flex items-center gap-3 mb-2">
+                  <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-teal-600 rounded-lg"></div>
+                  <div class="flex-1">
+                    <p class="font-bold text-gray-900 text-sm">Amazing Product</p>
+                    <p class="text-xs text-gray-600">+15 upvotes today</p>
+                  </div>
+                </div>
+                <p class="text-sm text-gray-700">"This is exactly what we needed! 🚀"</p>
+              </div>
+              <div class="bg-white rounded-xl p-4 shadow-md">
+                <p class="text-sm font-semibold text-gray-900 mb-2">🎉 Your product is trending!</p>
+                <div class="flex gap-2">
+                  <span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-semibold">#3 Today</span>
+                  <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-semibold">Top in SaaS</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="animate-slide-in-right lg:order-1">
+          <div class="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-700 font-semibold text-sm mb-4">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+            </svg>
+            Community & Discovery
+          </div>
+          <h3 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6" style="letter-spacing: -0.01em;">
+            Connect with Makers & Discover Innovation
+          </h3>
+          <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+            Build meaningful connections with fellow makers, discover cutting-edge products, and stay updated on the latest African tech innovations.
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <p class="font-bold text-gray-900">Follow Makers</p>
+                <p class="text-gray-600">Stay updated on launches from your favorite creators</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <p class="font-bold text-gray-900">Curated Collections</p>
+                <p class="text-gray-600">Organize and share your favorite products</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-6 h-6 text-green-500 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <div>
+                <p class="font-bold text-gray-900">Real-time Notifications</p>
+                <p class="text-gray-600">Never miss important updates and engagement</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-20 bg-gradient-to-br from-red-600 via-blue-600 to-teal-500 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10">
+    <svg class="absolute top-10 right-10 w-64 h-64 text-white animate-float" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path fill="currentColor" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,90,-16.3,88.5,-0.9C87,14.6,81.4,29.2,73.1,42.8C64.8,56.4,53.8,69,40.3,76.8C26.8,84.6,11.1,87.6,-4.8,85.9C-20.7,84.2,-41.4,77.8,-56.6,67.1C-71.8,56.4,-81.5,41.4,-85.6,25.1C-89.7,8.8,-88.2,-8.8,-82.3,-24.7C-76.4,-40.6,-66.1,-54.8,-53.1,-62.3C-40.1,-69.8,-24.4,-70.6,-9.3,-73.9C5.8,-77.2,30.6,-83.6,44.7,-76.4Z" transform="translate(100 100)" />
+    </svg>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 animate-slide-up">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4" style="letter-spacing: -0.02em;">
+        How It Works
+      </h2>
+      <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+        Get started in 3 simple steps and join the African tech revolution
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+      <!-- Step 1 -->
+      <div class="relative animate-slide-up" style="animation-delay: 0.1s;">
+        <div class="glass-effect rounded-3xl p-8 text-center hover-lift">
+          <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+            <span class="text-4xl font-extrabold text-gradient">1</span>
+          </div>
+          <h3 class="text-2xl font-extrabold text-white mb-4">Sign Up Free</h3>
+          <p class="text-blue-100 leading-relaxed">
+            Create your account in seconds. No credit card required, no hidden fees. Just your email and you're ready to go.
+          </p>
+        </div>
+        <!-- Connector Arrow (hidden on mobile) -->
+        <div class="hidden md:block absolute top-1/2 -right-6 transform -translate-y-1/2">
+          <svg class="w-12 h-12 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="relative animate-slide-up" style="animation-delay: 0.2s;">
+        <div class="glass-effect rounded-3xl p-8 text-center hover-lift">
+          <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+            <span class="text-4xl font-extrabold text-gradient">2</span>
+          </div>
+          <h3 class="text-2xl font-extrabold text-white mb-4">Launch Your Product</h3>
+          <p class="text-blue-100 leading-relaxed">
+            Submit your product with a compelling description, images, and links. Our simple form makes it easy to showcase your innovation.
+          </p>
+        </div>
+        <!-- Connector Arrow (hidden on mobile) -->
+        <div class="hidden md:block absolute top-1/2 -right-6 transform -translate-y-1/2">
+          <svg class="w-12 h-12 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="relative animate-slide-up" style="animation-delay: 0.3s;">
+        <div class="glass-effect rounded-3xl p-8 text-center hover-lift">
+          <div class="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+            <span class="text-4xl font-extrabold text-gradient">3</span>
+          </div>
+          <h3 class="text-2xl font-extrabold text-white mb-4">Grow & Engage</h3>
+          <p class="text-blue-100 leading-relaxed">
+            Watch your product gain traction. Respond to comments, track analytics, and connect with users who love what you're building.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-12 animate-slide-up" style="animation-delay: 0.4s;">
+      <%= link_to new_user_registration_path, class: "inline-flex items-center justify-center px-10 py-5 border-2 border-white rounded-xl text-xl font-bold text-red-600 bg-white hover:bg-red-50 transition-all duration-300 transform hover:-translate-y-1 shadow-2xl hover:shadow-3xl" do %>
+        <svg class="w-7 h-7 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        </svg>
+        Start Your Journey Today
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA Section -->
+<section class="py-20 bg-white">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="bg-gradient-to-br from-red-600 via-blue-600 to-teal-500 rounded-3xl p-12 md:p-16 shadow-2xl relative overflow-hidden">
+      <!-- Decorative Elements -->
+      <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full -ml-32 -mb-32"></div>
+
+      <div class="relative">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6" style="letter-spacing: -0.02em;">
+          Ready to Launch Your Product?
+        </h2>
+        <p class="text-xl md:text-2xl text-blue-100 mb-10 max-w-2xl mx-auto" style="font-weight: 300;">
+          Join <%= number_with_delimiter(@total_makers) %>+ African makers who are building the future of tech. It's free, fast, and takes less than 2 minutes.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <%= link_to new_user_registration_path, class: "group inline-flex items-center justify-center px-10 py-5 border-2 border-white rounded-xl text-xl font-bold text-red-600 bg-white hover:bg-red-50 transition-all duration-300 transform hover:-translate-y-1 shadow-2xl hover:shadow-3xl" do %>
+            <svg class="w-7 h-7 mr-3 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Get Started Free
+          <% end %>
+
+          <%= link_to products_path, class: "inline-flex items-center justify-center px-10 py-5 border-2 border-white/30 rounded-xl text-xl font-bold text-white glass-effect hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-1 shadow-xl" do %>
+            <svg class="w-7 h-7 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            Explore Products
+          <% end %>
+        </div>
+
+        <div class="mt-8 flex flex-wrap justify-center items-center gap-6 text-sm text-blue-100">
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Free forever</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>No credit card</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Launch in minutes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

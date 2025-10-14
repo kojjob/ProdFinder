@@ -1,0 +1,217 @@
+<% content_for :title, "Edit #{@product.name} - AfriHunt" %>
+
+<div class="min-h-screen bg-gray-50">
+  <!-- Header -->
+  <div class="bg-gradient-to-br from-blue-600 via-blue-700 to-purple-700 text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="text-center">
+        <h1 class="text-4xl font-bold mb-4">Edit Your Product</h1>
+        <p class="text-xl text-blue-100 max-w-2xl mx-auto">
+          Update your product details and keep your community informed.
+        </p>
+        
+        <% if @product.created_at > 24.hours.ago %>
+          <div class="mt-4 inline-flex items-center px-4 py-2 bg-yellow-500 text-white rounded-lg text-sm font-medium">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+            Edit window closes in <%= distance_of_time_in_words_to_now(@product.created_at + 24.hours) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Main Form -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+      <%= form_with(model: @product, local: true, class: "space-y-8 p-8") do |f| %>
+        <!-- Error Messages -->
+        <% if @product.errors.any? %>
+          <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div class="ml-3">
+                <h3 class="text-sm font-medium text-red-800">
+                  <%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:
+                </h3>
+                <ul class="mt-2 text-sm text-red-700 list-disc list-inside">
+                  <% @product.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <!-- Section 1: Basic Information -->
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Basic Information</h2>
+
+          <div class="space-y-6">
+            <!-- Product Name -->
+            <div>
+              <%= f.label :name, "Product Name", class: "block text-sm font-semibold text-gray-700 mb-2" %>
+              <%= f.text_field :name, 
+                  class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 #{'bg-gray-100' if @product.created_at <= 24.hours.ago}",
+                  required: true,
+                  maxlength: 100,
+                  disabled: @product.created_at <= 24.hours.ago %>
+              <% if @product.created_at <= 24.hours.ago %>
+                <p class="mt-1 text-sm text-gray-500">⚠️ Name cannot be changed after 24 hours</p>
+              <% else %>
+                <p class="mt-1 text-sm text-gray-500">The name of your product (3-100 characters)</p>
+              <% end %>
+            </div>
+
+            <!-- Tagline -->
+            <div>
+              <%= f.label :tagline, "Tagline", class: "block text-sm font-semibold text-gray-700 mb-2" %>
+              <%= f.text_field :tagline, 
+                  class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 #{'bg-gray-100' if @product.created_at <= 24.hours.ago}",
+                  required: true,
+                  maxlength: 100,
+                  disabled: @product.created_at <= 24.hours.ago %>
+              <% if @product.created_at <= 24.hours.ago %>
+                <p class="mt-1 text-sm text-gray-500">⚠️ Tagline cannot be changed after 24 hours</p>
+              <% else %>
+                <p class="mt-1 text-sm text-gray-500">One sentence that captures what makes your product special (10-100 characters)</p>
+              <% end %>
+            </div>
+
+            <!-- Description -->
+            <div>
+              <%= f.label :description, "Description", class: "block text-sm font-semibold text-gray-700 mb-2" %>
+              <%= f.text_area :description, 
+                  rows: 8,
+                  class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200",
+                  required: true,
+                  maxlength: 5000 %>
+              <p class="mt-1 text-sm text-gray-500">A detailed description of your product (50-5000 characters)</p>
+            </div>
+
+            <!-- Website URL -->
+            <div>
+              <%= f.label :website_url, "Website URL", class: "block text-sm font-semibold text-gray-700 mb-2" %>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                  </svg>
+                </div>
+                <%= f.url_field :website_url, 
+                    class: "w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200",
+                    required: true %>
+              </div>
+              <p class="mt-1 text-sm text-gray-500">Where can people find your product?</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Additional Details -->
+        <div class="pt-8 border-t border-gray-200">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Additional Details</h2>
+
+          <div class="space-y-6">
+            <!-- Pricing Type -->
+            <div>
+              <%= f.label :pricing_type, "Pricing Model", class: "block text-sm font-semibold text-gray-700 mb-2" %>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <% Product.pricing_types.keys.each do |pricing_type| %>
+                  <label class="relative flex items-center justify-center px-4 py-3 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 transition-all duration-200 has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50 <%= 'opacity-50 cursor-not-allowed' if @product.created_at <= 24.hours.ago %>">
+                    <%= f.radio_button :pricing_type, pricing_type, 
+                        class: "sr-only",
+                        disabled: @product.created_at <= 24.hours.ago %>
+                    <span class="text-sm font-medium text-gray-900 capitalize"><%= pricing_type.humanize %></span>
+                  </label>
+                <% end %>
+              </div>
+              <% if @product.created_at <= 24.hours.ago %>
+                <p class="mt-2 text-sm text-gray-500">⚠️ Pricing type cannot be changed after 24 hours</p>
+              <% else %>
+                <p class="mt-2 text-sm text-gray-500">How do you charge for your product?</p>
+              <% end %>
+            </div>
+
+            <!-- Topics -->
+            <div>
+              <%= f.label :topic_ids, "Topics", class: "block text-sm font-semibold text-gray-700 mb-2" %>
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-3 max-h-64 overflow-y-auto p-4 border border-gray-200 rounded-lg bg-gray-50">
+                <% Topic.active.ordered.each do |topic| %>
+                  <label class="relative flex items-center px-3 py-2 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-white transition-all duration-200 has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50">
+                    <%= f.check_box :topic_ids, 
+                        { multiple: true, class: "sr-only" }, 
+                        topic.id, 
+                        nil %>
+                    <span class="flex items-center text-sm font-medium text-gray-900">
+                      <% if topic.icon.present? %>
+                        <span class="mr-2"><%= topic.icon %></span>
+                      <% end %>
+                      <%= topic.name %>
+                    </span>
+                  </label>
+                <% end %>
+              </div>
+              <p class="mt-2 text-sm text-gray-500">Select 2-5 topics that best describe your product</p>
+            </div>
+
+            <!-- Maker Comment -->
+            <div>
+              <%= f.label :maker_comment, "Maker Comment (Optional)", class: "block text-sm font-semibold text-gray-700 mb-2" %>
+              <%= f.text_area :maker_comment, 
+                  rows: 4,
+                  class: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200",
+                  maxlength: 1000 %>
+              <p class="mt-1 text-sm text-gray-500">A personal note from you to the community (optional)</p>
+            </div>
+
+            <!-- Africa Focused -->
+            <div class="flex items-start">
+              <div class="flex items-center h-5">
+                <%= f.check_box :africa_focused, 
+                    class: "w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" %>
+              </div>
+              <div class="ml-3">
+                <%= f.label :africa_focused, class: "text-sm font-medium text-gray-700" do %>
+                  This product is built for African markets
+                <% end %>
+                <p class="text-sm text-gray-500">Check this if your product specifically targets African users or solves African problems</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="flex items-center justify-between pt-8 border-t border-gray-200">
+          <%= link_to "Cancel", product_path(@product), class: "px-6 py-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200" %>
+          
+          <div class="flex items-center space-x-4">
+            <% if @product.draft? %>
+              <%= f.submit "Save as Draft", 
+                  name: "draft",
+                  class: "px-6 py-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200" %>
+              <%= f.submit "Publish Product", 
+                  class: "px-8 py-3 border border-transparent rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5" %>
+            <% else %>
+              <%= f.submit "Update Product", 
+                  class: "px-8 py-3 border border-transparent rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Back to Product -->
+    <div class="mt-8 text-center">
+      <%= link_to product_path(@product), class: "text-sm text-gray-600 hover:text-gray-900" do %>
+        ← Back to product page
+      <% end %>
+    </div>
+  </div>
+</div>
+

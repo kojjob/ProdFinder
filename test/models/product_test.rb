@@ -209,4 +209,82 @@ class ProductTest < ActiveSupport::TestCase
     @product.mark_as_product_of_day!
     assert @product.product_of_day?
   end
+
+  # Tests for user_id association and bigint fix
+  test "should handle bigint user_id correctly" do
+    @product.save!
+
+    # Verify user_id is stored as integer (bigint)
+    assert_equal @user.id, @product.user_id
+    assert_kind_of Integer, @product.user_id
+
+    # Verify association works
+    assert_equal @user, @product.user
+  end
+
+  test "should allow nil user_id" do
+    @product.user = nil
+    assert @product.valid?
+    assert_nil @product.user_id
+  end
+
+  test "should have many product_makers" do
+    assert_respond_to @product, :product_makers
+    assert_respond_to @product, :makers
+  end
+
+  test "should create product makers through association" do
+    @product.save!
+
+    product_maker = @product.product_makers.create!(
+      user: @user,
+      role: :founder,
+      position: 0
+    )
+
+    assert_includes @product.product_makers, product_maker
+    assert_includes @product.makers, @user
+  end
+
+test "should validate at least one maker" do
+    @product.save!
+
+    # Should be invalid without makers
+    assert_not @product.valid?
+    assert_includes @product.errors[:base], "Product must have at least one maker"
+
+    # Should be valid with makers
+    @product.product_makers.create!(
+      user: @user,
+      role: :founder,
+      position: 0
+    )
+    assert @product.valid?
+  end
+
+test "should validate maker existence" do
+    @product.save!
+
+    # Create maker with non-existent user
+    product_maker = @product.product_makers.build(
+      user_id: 99999, # Non-existent user ID
+      role: :founder,
+      position: 0
+    )
+
+    assert_not @product.valid?
+    # The validation might show different error messages
+    # Check that there's some validation error related to makers
+    maker_errors = @product.errors.full_messages.any? { |msg| msg.include?("maker") || msg.include?("Product makers") }
+    assert maker_errors, "Expected maker validation error, got: #{@product.errors.full_messages.join(', ')}"
+  end
+
+  test "should handle user association after save" do
+    @product.save!
+
+    # Test that user association works correctly after save
+    assert_equal @user, @product.user
+    assert_equal @user.email, @product.user.email
+    assert_equal @user.username, @product.user.username
+  end
 end

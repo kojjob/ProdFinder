@@ -16,7 +16,7 @@ class Collection < ApplicationRecord
   # - timestamps
 
   # Enums
-  enum :visibility, { public: 0, unlisted: 1, private: 2 }
+  enum :visibility, { public: 0, unlisted: 1, private: 2 }, prefix: true
 
   # Relationships
   belongs_to :user

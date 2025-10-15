@@ -20,18 +20,18 @@
               <% upvoted = current_user&.upvoted?(@product) %>
               <%= link_to toggle_upvote_product_path(@product),
                   class: "group/upvote flex flex-col items-center px-8 py-6 bg-white rounded-2xl border-2 #{upvoted ? 'border-teal-500 bg-teal-50' : 'border-gray-200'} hover:border-teal-500 hover:bg-teal-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105",
-              data: {
-              turbo_method: :post,
-              controller: "upvote-animation",
-              action: "click->upvote-animation#animate"
-              } do %>
-              <svg class="w-10 h-10 mb-2 transition-colors duration-200 #{upvoted ? 'text-teal-600' : 'text-gray-400'} group-hover/upvote:text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
-              </svg>
-              <span class="text-4xl font-bold #{upvoted ? 'text-teal-600' : 'text-gray-900'} group-hover/upvote:text-teal-600"><%= @product.upvotes_count %></span>
-              <span class="text-sm font-bold text-gray-600 mt-1">Upvotes</span>
+                  data: {
+                    turbo_method: :post,
+                    controller: "upvote-animation",
+                    action: "click->upvote-animation#animate"
+                  } do %>
+                <svg class="w-10 h-10 mb-2 transition-colors duration-200 #{upvoted ? 'text-teal-600' : 'text-gray-400'} group-hover/upvote:text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
+                </svg>
+                <span class="text-4xl font-bold #{upvoted ? 'text-teal-600' : 'text-gray-900'} group-hover/upvote:text-teal-600"><%= @product.upvotes_count %></span>
+                <span class="text-sm font-bold text-gray-600 mt-1">Upvotes</span>
+              <% end %>
             <% end %>
-          <% end %>
         </div>
         <!-- Product Details -->
         <div class="space-y-8">

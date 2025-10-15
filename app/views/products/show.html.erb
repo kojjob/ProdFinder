@@ -17,18 +17,34 @@
             </div>
             <!-- Upvote Button - Clean Design -->
             <%= turbo_frame_tag "upvote_#{@product.id}" do %>
-              <%= link_to toggle_upvote_product_path(@product),
-                  class: "group/upvote flex flex-col items-center px-8 py-6 bg-white rounded-2xl border-2 <%= current_user&.upvoted?(@product) ? 'border-teal-500 bg-teal-50' : 'border-gray-200' %> hover:border-teal-500 hover:bg-teal-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105",
-                  data: {
-                    turbo_method: :post,
-                    controller: "upvote-animation",
-                    action: "click->upvote-animation#animate"
-                  } do %>
-                <svg class="w-10 h-10 mb-2 transition-colors duration-200 <%= current_user&.upvoted?(@product) ? 'text-teal-600' : 'text-gray-400' %> group-hover/upvote:text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
-                </svg>
-                <span class="text-4xl font-bold <%= current_user&.upvoted?(@product) ? 'text-teal-600' : 'text-gray-900' %> group-hover/upvote:text-teal-600"><%= @product.upvotes_count %></span>
-                <span class="text-sm font-bold text-gray-600 mt-1">Upvotes</span>
+              <% if current_user&.upvoted?(@product) %>
+                <%= link_to toggle_upvote_product_path(@product),
+                    class: "group/upvote flex flex-col items-center px-8 py-6 bg-white rounded-2xl border-2 border-teal-500 bg-teal-50 hover:border-teal-500 hover:bg-teal-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105",
+                    data: {
+                      turbo_method: :post,
+                      controller: "upvote-animation",
+                      action: "click->upvote-animation#animate"
+                    } do %>
+                  <svg class="w-10 h-10 mb-2 transition-colors duration-200 text-teal-600 group-hover/upvote:text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
+                  </svg>
+                  <span class="text-4xl font-bold text-teal-600 group-hover/upvote:text-teal-600"><%= @product.upvotes_count %></span>
+                  <span class="text-sm font-bold text-gray-600 mt-1">Upvotes</span>
+                <% end %>
+              <% else %>
+                <%= link_to toggle_upvote_product_path(@product),
+                    class: "group/upvote flex flex-col items-center px-8 py-6 bg-white rounded-2xl border-2 border-gray-200 hover:border-teal-500 hover:bg-teal-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105",
+                    data: {
+                      turbo_method: :post,
+                      controller: "upvote-animation",
+                      action: "click->upvote-animation#animate"
+                    } do %>
+                  <svg class="w-10 h-10 mb-2 transition-colors duration-200 text-gray-400 group-hover/upvote:text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
+                  </svg>
+                  <span class="text-4xl font-bold text-gray-900 group-hover/upvote:text-teal-600"><%= @product.upvotes_count %></span>
+                  <span class="text-sm font-bold text-gray-600 mt-1">Upvotes</span>
+                <% end %>
               <% end %>
             <% end %>
           </div>
@@ -46,7 +62,6 @@
                 <%= @product.description %>
               </p>
             </div>
-
             <!-- Topics -->
             <% if @product.topics.any? %>
               <div class="flex flex-wrap gap-3">
@@ -60,15 +75,14 @@
                 <% end %>
               </div>
             <% end %>
-
             <!-- Makers -->
             <div class="bg-gray-50 rounded-2xl p-6 border-2 border-gray-200">
               <div class="flex items-center space-x-4">
                 <span class="text-base font-bold text-gray-600">Created by</span>
                 <div class="flex items-center -space-x-3">
                   <% @product.makers.each do |maker| %>
-                    <%= link_to user_path(maker), class: "group relative" do %>
-                      <div class="w-14 h-14 rounded-full bg-gradient-to-br from-teal-500 to-blue-600 border-4 border-white shadow-lg flex items-center justify-center transform hover:scale-110 hover:z-10 transition-all duration-200" title="<%= maker.full_name %>">
+                    <%= link_to user_path(maker), class: "group relative", title: maker.full_name do %>
+                      <div class="w-14 h-14 rounded-full bg-gradient-to-br from-teal-500 to-blue-600 border-4 border-white shadow-lg flex items-center justify-center transform hover:scale-110 hover:z-10 transition-all duration-200">
                         <span class="text-white text-lg font-bold"><%= maker.full_name.first %></span>
                       </div>
                     <% end %>
@@ -82,7 +96,6 @@
                 </div>
               </div>
             </div>
-
             <!-- Action Buttons -->
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <%= link_to @product.website_url,
@@ -125,7 +138,6 @@
                 </div>
                 <span class="text-3xl font-bold text-red-600"><%= @product.upvotes_count %></span>
               </div>
-
               <!-- Comments with Blue accent -->
               <div class="flex items-center justify-between p-4 bg-blue-50 rounded-xl border-2 border-blue-100">
                 <div class="flex items-center space-x-3">
@@ -138,7 +150,6 @@
                 </div>
                 <span class="text-3xl font-bold text-blue-600"><%= @product.comments_count %></span>
               </div>
-
               <!-- Launch Date with Teal accent -->
               <div class="flex items-center justify-between p-4 bg-teal-50 rounded-xl border-2 border-teal-100">
                 <div class="flex items-center space-x-3">
@@ -153,7 +164,6 @@
               </div>
             </div>
           </div>
-
           <!-- Maker Comment -->
           <% if @product.maker_comment.present? %>
             <div class="bg-white rounded-2xl p-8 border-2 border-gray-200 shadow-lg">
@@ -187,7 +197,6 @@
               Discussion (<%= @product.comments_count %>)
             </h2>
           </div>
-
           <!-- Comments List -->
           <div id="comments" class="p-8 space-y-6 bg-gray-50">
             <%= turbo_frame_tag "comments_list" do %>
@@ -224,7 +233,6 @@
                 Join Discussion
               </h3>
             </div>
-
             <!-- Form -->
             <div class="p-6 bg-gray-50">
               <%= form_with(model: [@product, @comment],
@@ -251,7 +259,6 @@
                       </span>
                     </div>
                   </div>
-
                   <div class="flex flex-col space-y-3">
                     <div class="text-sm text-gray-600 font-medium">
                       Commenting as <span class="text-blue-600 font-bold"><%= current_user.full_name %></span>

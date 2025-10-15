@@ -18,13 +18,13 @@
             <!-- Upvote Button - Clean Design -->
             <%= turbo_frame_tag "upvote_#{@product.id}" do %>
               <% if current_user&.upvoted?(@product) %>
-                <%= link_to toggle_upvote_product_path(@product),
+                <%= button_to toggle_upvote_product_path(@product),
                     class: "group/upvote flex flex-col items-center px-8 py-6 bg-white rounded-2xl border-2 border-teal-500 bg-teal-50 hover:border-teal-500 hover:bg-teal-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105",
                     data: {
-                      turbo_method: :post,
                       controller: "upvote-animation",
                       action: "click->upvote-animation#animate"
-                    } do %>
+                    },
+                    form: { data: { turbo_frame: "upvote_#{@product.id}" } } do %>
                   <svg class="w-10 h-10 mb-2 transition-colors duration-200 text-teal-600 group-hover/upvote:text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
                   </svg>
@@ -32,13 +32,13 @@
                   <span class="text-sm font-bold text-gray-600 mt-1">Upvotes</span>
                 <% end %>
               <% else %>
-                <%= link_to toggle_upvote_product_path(@product),
+                <%= button_to toggle_upvote_product_path(@product),
                     class: "group/upvote flex flex-col items-center px-8 py-6 bg-white rounded-2xl border-2 border-gray-200 hover:border-teal-500 hover:bg-teal-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105",
                     data: {
-                      turbo_method: :post,
                       controller: "upvote-animation",
                       action: "click->upvote-animation#animate"
-                    } do %>
+                    },
+                    form: { data: { turbo_frame: "upvote_#{@product.id}" } } do %>
                   <svg class="w-10 h-10 mb-2 transition-colors duration-200 text-gray-400 group-hover/upvote:text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
                   </svg>

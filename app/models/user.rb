@@ -54,6 +54,10 @@ class User < ApplicationRecord
 
   # Passwordless authentication using devise-passwordless gem
 
+  def send_passwordless_link
+    send_magic_link
+  end
+
   # Scopes
   scope :makers, -> { where(maker_status: true) }
   scope :verified, -> { where(verified: true) }

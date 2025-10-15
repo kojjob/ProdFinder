@@ -1,7 +1,7 @@
 # Controller for managing products in the ProdFinder platform
 # Handles product creation, editing, viewing, and user-specific product listings
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :my_products ]
+  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :my_products, :toggle_upvote ]
   before_action :set_product, only: [ :show, :edit, :update ]
 
   # GET /products

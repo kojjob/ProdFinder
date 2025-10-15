@@ -74,6 +74,6 @@ class UsersController < ApplicationController
   # Strong parameters for user profile updates
   # @return [ActionController::Parameters] permitted profile parameters
   def user_params
-    params.require(:user).permit(:full_name, :username, :bio, :website_url, :twitter_handle, :github, :avatar)
+    params.require(:user).permit(:full_name, :username, :bio, :website_url, :twitter_handle, :avatar)
   end
 end

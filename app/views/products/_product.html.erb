@@ -1,101 +1,77 @@
-<%= content_tag :div, id: "product_#{product.id}", class: "h-full animate-slide-up", style: "animation-delay: #{(index % 12) * 0.05}s;" do %>
-  <div class="relative h-full"
-       data-controller="card-hover"
-       data-action="mouseenter->card-hover#mouseEnter mousemove->card-hover#mouseMove mouseleave->card-hover#mouseLeave click->card-hover#click">
-    <%= link_to product_path(product), class: "group", data: { turbo: false } do %>
-      <div class="relative h-full bg-white rounded-2xl shadow-md border border-gray-200/50 overflow-hidden hover:shadow-xl transition-all duration-300 card-hover-glow group-hover:border-transparent"
-           data-card-hover-target="card">
-        <!-- Gradient Border on Hover -->
-        <div class="absolute inset-0 bg-gradient-to-br from-red-600 via-blue-600 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" style="padding: 2px;">
-          <div class="h-full w-full bg-white rounded-2xl"></div>
-        </div>
-        <div class="relative p-6 h-full flex flex-col">
-          <!-- Header -->
-          <div class="flex items-start justify-between mb-4">
-            <div class="flex-1 min-w-0">
-              <h3 class="text-xl font-extrabold text-gray-900 mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-red-600 group-hover:via-blue-600 group-hover:to-teal-600 group-hover:bg-clip-text transition-all duration-300 truncate" style="letter-spacing: -0.01em;">
-                <%= product.name %>
-              </h3>
-              <p class="text-gray-600 text-sm leading-relaxed line-clamp-2 min-h-[2.5rem]">
-                <%= truncate(product.tagline, length: 100) %>
-              </p>
-            </div>
-            <!-- Upvote Button with Turbo Frame -->
-            <div class="ml-4 flex-shrink-0">
-              <%= turbo_frame_tag "upvote_#{product.id}" do %>
-                <%= link_to toggle_upvote_product_path(product),
-                  class: "group/upvote flex flex-col items-center px-4 py-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200 hover:from-red-50 hover:to-orange-50 hover:border-red-300 transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105",
-                  data: {
-                    turbo_method: :post,
-                    controller: "upvote-animation",
-                    action: "click->upvote-animation#animate",
-                    upvote_animation_target: "button"
-                  } do %>
-                  <svg class="w-5 h-5 text-gray-600 group-hover/upvote:text-red-600 mb-1 transition-colors duration-200 <%= 'text-red-600' if current_user&.upvoted?(product) %>"
-                       fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"
-                       data-upvote-animation-target="icon">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
-                  </svg>
-                  <span class="text-base font-extrabold text-gray-900" data-upvote-animation-target="count"><%= product.upvotes_count %></span>
-                <% end %>
-              <% end %>
-            </div>
+<%= content_tag :div, id: "product_#{product.id}", class: "h-full" do %>
+  <div class="bg-white rounded-lg border border-gray-200 p-6 hover:border-gray-300 hover:shadow-md transition-all duration-200 h-full flex flex-col">
+    <%= link_to product_path(product), class: "group flex-1 flex flex-col", data: { turbo: false } do %>
+      <div class="flex-1 flex flex-col">
+        <!-- Header -->
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex-1 min-w-0">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors truncate">
+              <%= product.name %>
+            </h3>
+            <p class="text-gray-600 text-sm leading-relaxed line-clamp-2">
+              <%= truncate(product.tagline, length: 100) %>
+            </p>
           </div>
-          <!-- Topics -->
+        </div>
+        <!-- Topics -->
+        <% if product.topics.any? %>
           <div class="flex flex-wrap gap-2 mb-4">
             <% product.topics.first(3).each do |topic| %>
-              <span class="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold bg-gradient-to-r from-gray-100 to-gray-50 text-gray-700 border border-gray-200 hover:border-gray-300 transition-colors duration-200">
+              <span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-700">
                 <% if topic.icon.present? %>
-                  <span class="mr-1.5"><%= topic.icon %></span>
+                  <span class="mr-1"><%= topic.icon %></span>
                 <% end %>
                 <%= topic.name %>
               </span>
             <% end %>
           </div>
-          <!-- Spacer -->
-          <div class="flex-grow"></div>
-          <!-- Footer -->
-          <div class="flex items-center justify-between pt-4 mt-4 border-t border-gray-100">
-            <div class="flex items-center min-w-0 flex-1">
-              <div class="w-7 h-7 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-sm flex-shrink-0">
-                <span class="text-white text-xs font-bold"><%= product.makers.first.full_name.first if product.makers.any? %></span>
+        <% end %>
+        <!-- Spacer -->
+        <div class="flex-grow"></div>
+        <!-- Footer -->
+        <div class="flex items-center justify-between pt-4 mt-4 border-t border-gray-100">
+          <div class="flex items-center min-w-0 flex-1">
+            <% if product.makers.any? %>
+              <div class="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0">
+                <span class="text-white text-xs font-medium"><%= product.makers.first.full_name.first %></span>
               </div>
-              <span class="ml-2 text-sm font-semibold text-gray-700 truncate">
-                <%= product.makers.first.full_name if product.makers.any? %>
+              <span class="ml-2 text-sm text-gray-600 truncate">
+                <%= product.makers.first.full_name %>
               </span>
-            </div>
-            <div class="flex items-center space-x-4 text-sm text-gray-500 ml-4 flex-shrink-0">
-              <div class="flex items-center">
-                <svg class="w-4 h-4 mr-1.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
-                </svg>
-                <span class="font-semibold"><%= product.comments_count %></span>
-              </div>
-            </div>
+            <% end %>
           </div>
-        </div>
-        <!-- Hover Indicator -->
-        <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-300">
-          <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
-            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          <div class="flex items-center text-sm text-gray-500 ml-4 flex-shrink-0">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
             </svg>
+            <span><%= product.comments_count %></span>
           </div>
-        </div>
-        <!-- Quick View Button -->
-        <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-          <%= link_to quick_view_product_path(product), 
-              class: "inline-flex items-center px-4 py-2 bg-white/90 backdrop-blur-sm text-gray-800 rounded-lg text-sm font-semibold shadow-lg hover:bg-white hover:shadow-xl transition-all duration-200",
-              data: { turbo: true } do %>
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-            </svg>
-            Quick View
-          <% end %>
         </div>
       </div>
     <% end %>
+    <!-- Upvote Button -->
+    <div class="mt-4 pt-4 border-t border-gray-100">
+      <%= turbo_frame_tag "upvote_#{product.id}" do %>
+        <% if current_user&.upvoted?(product) %>
+          <%= button_to toggle_upvote_product_path(product),
+              class: "w-full flex items-center justify-center px-3 py-2 text-sm font-medium text-amber-600 hover:text-amber-700 transition-colors",
+              form: { data: { turbo_frame: "upvote_#{product.id}" } } do %>
+            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <%= product.upvotes_count %> upvotes
+          <% end %>
+        <% else %>
+          <%= button_to toggle_upvote_product_path(product),
+              class: "w-full flex items-center justify-center px-3 py-2 text-sm font-medium text-gray-500 hover:text-amber-600 transition-colors",
+              form: { data: { turbo_frame: "upvote_#{product.id}" } } do %>
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 20 20">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+            </svg>
+            <%= product.upvotes_count %> upvotes
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
-<% end %>
 <% end %>

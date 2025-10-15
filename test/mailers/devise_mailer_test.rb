@@ -7,19 +7,19 @@ class DeviseMailerTest < ActionMailer::TestCase
   end
 
   test "magic link email is sent with correct recipient" do
-    email = Devise::Mailer.magic_link(@user, @token, {})
+    email = DeviseMailer.magic_link(@user, @token, {})
 
     assert_emails 1 do
       email.deliver_now
     end
 
-    assert_equal [@user.email], email.to
-    assert_equal ["noreply@prodfinder.com"], email.from
+    assert_equal [ @user.email ], email.to
+    assert_equal [ "noreply@prodfinder.com" ], email.from
     assert_match(/magic link/i, email.subject)
   end
 
   test "magic link email contains the magic link URL" do
-    email = Devise::Mailer.magic_link(@user, @token, {})
+    email = DeviseMailer.magic_link(@user, @token, {})
 
     # Check that email body contains token
     assert_match @token, email.body.encoded
@@ -30,7 +30,7 @@ class DeviseMailerTest < ActionMailer::TestCase
   end
 
   test "magic link email contains security information" do
-    email = Devise::Mailer.magic_link(@user, @token, {})
+    email = DeviseMailer.magic_link(@user, @token, {})
 
     # Check for expiration notice
     assert_match(/expires/i, email.body.encoded)
@@ -41,7 +41,7 @@ class DeviseMailerTest < ActionMailer::TestCase
   end
 
   test "magic link email contains company branding" do
-    email = Devise::Mailer.magic_link(@user, @token, {})
+    email = DeviseMailer.magic_link(@user, @token, {})
 
     # Check for company name
     assert_match(/ProdFinder/i, email.body.encoded)
@@ -52,7 +52,7 @@ class DeviseMailerTest < ActionMailer::TestCase
   end
 
   test "magic link email has proper HTML structure" do
-    email = Devise::Mailer.magic_link(@user, @token, {})
+    email = DeviseMailer.magic_link(@user, @token, {})
 
     # Check for HTML email
     assert email.html_part.present?, "Email should have HTML part"
@@ -63,7 +63,7 @@ class DeviseMailerTest < ActionMailer::TestCase
   end
 
   test "magic link email contains help text for non-requesters" do
-    email = Devise::Mailer.magic_link(@user, @token, {})
+    email = DeviseMailer.magic_link(@user, @token, {})
 
     # Check for help text
     assert_match(/didn't request/i, email.body.encoded)
@@ -71,7 +71,7 @@ class DeviseMailerTest < ActionMailer::TestCase
   end
 
   test "magic link email has accessible button" do
-    email = Devise::Mailer.magic_link(@user, @token, {})
+    email = DeviseMailer.magic_link(@user, @token, {})
 
     # Check for button/link with descriptive text
     assert_match(/href=/i, email.body.encoded)
@@ -79,17 +79,17 @@ class DeviseMailerTest < ActionMailer::TestCase
   end
 
   test "passwordless login email is sent correctly" do
-    email = Devise::Mailer.passwordless_login(@user, @token, {})
+    email = DeviseMailer.passwordless_login(@user, @token, {})
 
     assert_emails 1 do
       email.deliver_now
     end
 
-    assert_equal [@user.email], email.to
+    assert_equal [ @user.email ], email.to
   end
 
   test "passwordless login email contains login link" do
-    email = Devise::Mailer.passwordless_login(@user, @token, {})
+    email = DeviseMailer.passwordless_login(@user, @token, {})
 
     # Check that email contains login information
     assert_match(/log in/i, email.body.encoded)
@@ -97,7 +97,7 @@ class DeviseMailerTest < ActionMailer::TestCase
   end
 
   test "passwordless login email contains expiration info" do
-    email = Devise::Mailer.passwordless_login(@user, @token, {})
+    email = DeviseMailer.passwordless_login(@user, @token, {})
 
     # Check for expiration notice
     assert_match(/expire/i, email.body.encoded)
@@ -114,7 +114,7 @@ class DeviseMailerTest < ActionMailer::TestCase
       email.deliver_now
     end
 
-    assert_equal [@user.email], email.to
+    assert_equal [ @user.email ], email.to
     assert_match(/confirm/i, email.subject)
   end
 
@@ -138,7 +138,7 @@ class DeviseMailerTest < ActionMailer::TestCase
       email.deliver_now
     end
 
-    assert_equal [@user.email], email.to
+    assert_equal [ @user.email ], email.to
     assert_match(/email.*changed/i, email.subject)
   end
 
@@ -152,7 +152,7 @@ class DeviseMailerTest < ActionMailer::TestCase
       email.deliver_now
     end
 
-    assert_equal [@user.email], email.to
+    assert_equal [ @user.email ], email.to
     assert_match(/unlock/i, email.subject)
   end
 
@@ -177,7 +177,7 @@ class DeviseMailerTest < ActionMailer::TestCase
 
     emails.each do |email|
       # All emails should have consistent from address
-      assert_equal ["noreply@prodfinder.com"], email.from
+      assert_equal [ "noreply@prodfinder.com" ], email.from
 
       # All emails should mention the app name
       assert_match(/ProdFinder/i, email.body.encoded)
@@ -185,7 +185,7 @@ class DeviseMailerTest < ActionMailer::TestCase
   end
 
   test "emails contain required legal links" do
-    email = Devise::Mailer.magic_link(@user, @token, {})
+    email = DeviseMailer.magic_link(@user, @token, {})
 
     # Check for privacy and terms links
     assert_match(/Privacy Policy/i, email.body.encoded)
@@ -193,7 +193,7 @@ class DeviseMailerTest < ActionMailer::TestCase
   end
 
   test "emails are mobile-responsive" do
-    email = Devise::Mailer.magic_link(@user, @token, {})
+    email = DeviseMailer.magic_link(@user, @token, {})
 
     # Check for responsive meta tags
     assert_match(/viewport/i, email.html_part.body.encoded)
@@ -204,7 +204,7 @@ class DeviseMailerTest < ActionMailer::TestCase
   end
 
   test "emails have fallback text for email clients" do
-    email = Devise::Mailer.magic_link(@user, @token, {})
+    email = DeviseMailer.magic_link(@user, @token, {})
 
     # Check for alternative text
     assert_match(/Or copy and paste/i, email.body.encoded)

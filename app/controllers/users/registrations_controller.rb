@@ -14,23 +14,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
 
     if resource.save
-      # For passwordless authentication with confirmable, we need to send confirmation email
-      # Skip the automatic confirmation email and send it manually to avoid mapping issues
-      resource.skip_confirmation_notification!
+      # For passwordless authentication with confirmable, let Devise handle the confirmation email
+      # Our custom DeviseMailer will be used automatically
+      Rails.logger.info "User created: #{resource.email}, confirmed: #{resource.confirmed?}, active_for_auth: #{resource.active_for_authentication?}"
 
       if resource.active_for_authentication?
         set_flash_message!(:notice, :signed_up)
         sign_up(resource_name, resource)
         respond_with resource, location: after_sign_up_path_for(resource)
       else
-        # Send confirmation email manually
-        begin
-          Devise::Mailer.confirmation_instructions(resource, resource.confirmation_token).deliver_now
-          set_flash_message!(:notice, :"signed_up_but_#{resource.inactive_message}")
-        rescue => e
-          Rails.logger.error "Failed to send confirmation email: #{e.message}"
-          set_flash_message!(:notice, :signed_up)
-        end
+        set_flash_message!(:notice, :"signed_up_but_#{resource.inactive_message}")
         expire_data_after_sign_in!
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end

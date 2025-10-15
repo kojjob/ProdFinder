@@ -27,7 +27,7 @@ Devise.setup do |config|
   config.mailer_sender = "noreply@prodfinder.com"
 
   # Configure the class responsible to send e-mails.
-  config.mailer = "Devise::Mailer"
+  config.mailer = "DeviseMailer"
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
@@ -319,7 +319,7 @@ Devise.setup do |config|
   # Need to use a custom Devise mailer in order to send magic links.
   # If you're already using a custom mailer just have it inherit from
   # Use regular Devise mailer for confirmations
-  config.mailer = "Devise::Mailer"
+  # config.mailer = "Devise::Mailer"
 
   # Which algorithm to use for tokenizing magic links. See README for descriptions
   config.passwordless_tokenizer = "SignedGlobalIDTokenizer"
